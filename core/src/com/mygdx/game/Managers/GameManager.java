@@ -22,13 +22,14 @@ public final class GameManager {
     private static ArrayList<Ship> ships;
     private static ArrayList<College> colleges;
 
-    private static final int cacheSize = 20;
+    private static final int cacheSize = 100;
     private static ArrayList<CannonBall> ballCache;
     private static int currentElement;
 
     private static JsonValue settings;
 
     private static TileMapGraph mapGraph;
+
 
     /**
      * facilitates creation of the game

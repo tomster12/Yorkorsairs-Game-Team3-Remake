@@ -28,27 +28,42 @@ public class Transform extends Component implements Location<Vector2> {
     /**
      * Set position associated with the Transform component.
      *
-     * @param pos 2D vector specifying the position
-     * @param rb  true to pass on the position to the parent's RigidBody
+     * @param pos       2D vector specifying the position
+     * @param rb_       true to pass on the position to the parent's RigidBody
+     * @param offset_   true to update offset on rb too
      */
-    public void setPosition(Vector2 pos, boolean rb) {
-        setPosition(pos.x, pos.y, rb);
-    }
+    public void setPosition(Vector2 pos, boolean rb_, boolean offset_) { setPosition(pos.x, pos.y, rb_, offset_); }
 
     /**
      * Set position associated with the Transform component.
      *
-     * @param x   coordinate
-     * @param y   coordinate
+     * @param pos 2D vector specifying the position
      * @param rb_ true to pass on the position to the parent's RigidBody
      */
-    public void setPosition(float x, float y, boolean rb_) {
+    public void setPosition(Vector2 pos, boolean rb_) { setPosition(pos.x, pos.y, rb_, false); }
+
+    /**
+     * Set position associated with the Transform component.
+     *
+     * @param x         coordinate
+     * @param y         coordinate
+     * @param rb_       true to pass on the position to the parent's RigidBody
+     */
+    public void setPosition(float x, float y, boolean rb_) { setPosition(x, y, rb_, false); }
+
+    /**
+     * Set position associated with the Transform component.
+     *
+     * @param x         coordinate
+     * @param y         coordinate
+     * @param rb_       true to pass on the position to the parent's RigidBody
+     * @param offset_   true to update offset on rb too
+     */
+    public void setPosition(float x, float y, boolean rb_, boolean offset_) {
         position.set(x, y);
         if (parent != null && rb_) {
             RigidBody rb = parent.getComponent(RigidBody.class);
-            if (rb != null) {
-                rb.setPosition(position);
-            }
+            if (rb != null) rb.setPosition(position, offset_);
         }
     }
 

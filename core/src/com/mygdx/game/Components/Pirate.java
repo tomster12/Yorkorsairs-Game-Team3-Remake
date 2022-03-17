@@ -70,9 +70,7 @@ public class Pirate extends Component {
      * @param dir the direction to shoot in
      */
     public void shoot(Vector2 dir) {
-        if (ammo == 0) {
-            return;
-        }
+        if (ammo == 0) return;
         ammo--;
         GameManager.shoot((Ship) parent, dir);
     }

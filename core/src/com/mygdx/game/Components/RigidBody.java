@@ -130,10 +130,9 @@ public class RigidBody extends Component {
      * @param offset should plly offset
      */
     public void setPosition(Vector2 position, boolean offset) {
+        parent.getComponent(Transform.class).setPosition(position, false);
         Body b = PhysicsManager.getBody(bodyId);
-        if (offset) {
-            position.add(halfDim);
-        }
+        if (offset) position.add(halfDim);
         b.setTransform(position, 0);
     }
 
@@ -148,11 +147,9 @@ public class RigidBody extends Component {
     public void update() {
         super.update();
         // parent.getComponent(Transform.class).setPosition(PhysicsManager.getBody(bodyId).getPosition());
-        Transform t = parent.getComponent(Transform.class);
-        Body b = getBody();
-        Vector2 p = b.getPosition().cpy();
-        p.sub(halfDim);
-        t.setPosition(p, false);
+
+        Vector2 p = getBody().getPosition().cpy().sub(halfDim);
+        parent.getComponent(Transform.class).setPosition(p, false);
     }
 
     public Vector2 getVelocity() {

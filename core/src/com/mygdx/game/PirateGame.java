@@ -6,9 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.Managers.ResourceManager;
-import com.mygdx.game.UI.EndScreen;
-import com.mygdx.game.UI.GameScreen;
-import com.mygdx.game.UI.MenuScreen;
+import com.mygdx.game.Entitys.UI.EndScreen;
+import com.mygdx.game.Entitys.UI.GameScreen;
+import com.mygdx.game.Entitys.UI.MenuScreen;
 
 /**
  * Contains class instances of game UI screens.

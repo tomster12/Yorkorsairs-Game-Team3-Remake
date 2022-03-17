@@ -56,13 +56,9 @@ public class Renderable extends Component {
     @Override
     public void update() {
         super.update();
-        if (sprite == null) {
-            return;
-        }
+        if (sprite == null) return;
         Transform c = parent.getComponent(Transform.class);
-        if (c == null) {
-            return;
-        }
+        if (c == null) return;
         Vector2 p = c.getPosition();
         Vector2 s = c.getScale();
 

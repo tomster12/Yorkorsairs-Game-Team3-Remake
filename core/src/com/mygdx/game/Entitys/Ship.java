@@ -140,9 +140,7 @@ public class Ship extends Entity implements CollisionCallBack {
         return getComponent(Pirate.class).getPlunder();
     }
 
-    public void shoot(Vector2 dir) {
-        getComponent(Pirate.class).shoot(dir);
-    }
+    public void shoot(Vector2 dir) { getComponent(Pirate.class).shoot(dir); }
 
     public void shoot() {
         getComponent(Pirate.class).shoot(currentDir);
