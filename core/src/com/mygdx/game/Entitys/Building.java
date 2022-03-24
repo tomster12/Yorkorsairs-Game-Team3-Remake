@@ -6,11 +6,14 @@ import com.mygdx.game.Components.Pirate;
 import com.mygdx.game.Components.Renderable;
 import com.mygdx.game.Components.RigidBody;
 import com.mygdx.game.Components.Transform;
+import com.mygdx.game.Faction;
 import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Managers.ResourceManager;
 import com.mygdx.game.Physics.CollisionCallBack;
 import com.mygdx.game.Physics.CollisionInfo;
 import com.mygdx.game.Physics.PhysicsBodyType;
+import java.util.Objects;
+import java.util.Random;
 
 import static com.mygdx.utils.Constants.BUILDING_SCALE;
 
@@ -18,16 +21,18 @@ import static com.mygdx.utils.Constants.BUILDING_SCALE;
  * Buildings that you see in game.
  */
 public class Building extends Entity implements CollisionCallBack {
+
     private String buildingName;
     private static int atlas_id;
     private boolean isFlag;
 
-    Building() {
+    Building(int factionId) {
         super();
         isFlag = false;
         Transform t = new Transform();
         t.setScale(BUILDING_SCALE, BUILDING_SCALE);
         Pirate p = new Pirate();
+        p.setFactionId(factionId);
         atlas_id = ResourceManager.getId("Buildings.txt");
         Renderable r = new Renderable(atlas_id, "big", RenderLayer.Transparent);
         addComponents(t, p, r);
@@ -38,8 +43,8 @@ public class Building extends Entity implements CollisionCallBack {
      *
      * @param isFlag set to true to create a flag
      */
-    Building(boolean isFlag) {
-        this();
+    Building(int factionId, boolean isFlag) {
+        this(factionId);
         this.isFlag = isFlag;
     }
 
@@ -97,11 +102,14 @@ public class Building extends Entity implements CollisionCallBack {
     public void EnterTrigger(CollisionInfo info) {
         if (info.a instanceof CannonBall && isAlive()) {
             CannonBall b = (CannonBall) info.a;
+
             // the ball if from the same faction
-            /*if(Objects.equals(b.getShooter().getComponent(Pirate.class).getFaction().getName(),
-                    getComponent(Pirate.class).getFaction().getName())) {
-                return;
-            }*/
+            Faction ballFaction = b.getShooter().getComponent(Pirate.class).getFaction();
+            Faction thisFaction = getComponent(Pirate.class).getFaction();
+            if(Objects.equals(ballFaction.getName(), thisFaction.getName())) return;
+
+            Ship ship = ((CannonBall) info.a).getShooter();
+            ship.plunder((int)(Math.random() * 10 + 15));
             destroy();
             ((CannonBall) info.a).kill();
         }

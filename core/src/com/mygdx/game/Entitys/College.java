@@ -41,7 +41,7 @@ public class College extends Entity {
         t.setPosition(f.getPosition());
         Pirate p = getComponent(Pirate.class);
         p.setFactionId(factionId);
-        spawn(f.getColour());
+        spawn(f.getColour(), factionId);
     }
 
     /**
@@ -49,7 +49,7 @@ public class College extends Entity {
      *
      * @param colour used to pull the appropriate flag sprite
      */
-    private void spawn(String colour) {
+    private void spawn(String colour, int factionId) {
         JsonValue collegeSettings = GameManager.getSettings().get("college");
         float radius = collegeSettings.getFloat("spawnRadius");
         // radius = Utilities.tilesToDistance(radius) * BUILDING_SCALE;
@@ -66,7 +66,7 @@ public class College extends Entity {
 
                 pos = Utilities.tilesToDistance(pos).add(origin);
 
-                Building b = new Building();
+                Building b = new Building(factionId);
                 buildings.add(b);
 
                 String b_name = Utilities.randomChoice(buildingNames, 0);
@@ -76,7 +76,7 @@ public class College extends Entity {
 
 
         }
-        Building flag = new Building(true);
+        Building flag = new Building(factionId, true);
         buildings.add(flag);
         flag.create(origin, colour);
     }

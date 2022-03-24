@@ -45,6 +45,7 @@ public class Pirate extends Component {
     }
 
     public void addPlunder(int money) {
+        System.out.println("Plundering " + money);
         plunder += money;
     }
 

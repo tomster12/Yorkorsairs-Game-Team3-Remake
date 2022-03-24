@@ -57,12 +57,13 @@ public class CannonBall extends Entity implements CollisionCallBack {
     private void updateAlive() {
         // Update age
         age += EntityManager.getDeltaTime();
-        if(age > MAX_AGE) kill();
+        if(isAlive && age > MAX_AGE) kill();
 
         // Kill if needed
         if (shouldBeAlive != isAlive) {
 
             if (!shouldBeAlive) {
+                System.out.println("Dying");
                 getComponent(Renderable.class).hide();
                 getComponent(RigidBody.class).setPosition(new Vector2(-1000, -1000));
                 getComponent(RigidBody.class).setVelocity(0, 0);
@@ -105,6 +106,7 @@ public class CannonBall extends Entity implements CollisionCallBack {
      * Marks cannonball for removal on next update.
      */
     public void kill() { shouldBeAlive = false; }
+
 
     public Ship getShooter() { return shooter; }
 

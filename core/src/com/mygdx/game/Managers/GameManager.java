@@ -89,9 +89,7 @@ public final class GameManager {
             CreateCollege(i + 1);
             for (int j = 0; j < cnt; j++) {
                 // prevents halifax from having shipcount + player
-                if (i == 0 && j > cnt - 2) {
-                    break;
-                }
+                if (i == 0 && j > cnt - 2) break;
                 NPCShip s = CreateNPCShip(i + 1);
                 s.getComponent(Transform.class).setPosition(getFaction(i + 1).getSpawnPos());
             }
