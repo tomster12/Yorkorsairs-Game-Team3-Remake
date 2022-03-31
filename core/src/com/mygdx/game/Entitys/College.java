@@ -73,9 +73,8 @@ public class College extends Entity {
 
                 b.create(pos, b_name);
             }
-
-
         }
+
         Building flag = new Building(factionId, true);
         buildings.add(flag);
         flag.create(origin, colour);

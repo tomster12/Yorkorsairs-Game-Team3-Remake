@@ -56,8 +56,9 @@ public class EndScreen extends Page {
         b.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Gdx.app.exit();
-                System.exit(0);
+                parent.reload();
+                // Gdx.app.exit();
+                // System.exit(0);
             }
         });
         t.add(b);

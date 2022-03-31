@@ -25,6 +25,7 @@ public final class PhysicsManager {
     private static ArrayList<Body> box2DBodies;
     private static Box2DDebugRenderer debug;
 
+
     public static void Initialize() {
         Initialize(false);
     }
@@ -46,6 +47,25 @@ public final class PhysicsManager {
             debug = new Box2DDebugRenderer(true, false, true, true, false, true);
         }
     }
+
+    /**
+     * Resets the manager if initialized
+     */
+    public static void reset() {
+        if (initialized) {
+            initialized = false;
+            box2DWorld = null;
+            box2DBodies = null;
+            debug = null;
+        }
+    }
+
+    private static void tryInit() {
+        if (!initialized) {
+            Initialize();
+        }
+    }
+
 
     public static int createBody(BodyDef bDef, FixtureDef fDef, Object userData) {
         tryInit();
@@ -108,12 +128,6 @@ public final class PhysicsManager {
 
     public static Body getBody(int id) {
         return box2DBodies.get(id - 1);
-    }
-
-    private static void tryInit() {
-        if (!initialized) {
-            Initialize();
-        }
     }
 
     public static void update() {

@@ -42,6 +42,28 @@ public final class ResourceManager {
     }
 
     /**
+     * Resets the manager if initialized
+     */
+    public static void reset() {
+        if (initialized) {
+            initialized = false;
+            loaded = false;
+            manager = null;
+            ids = null;
+            tileMaps = null;
+            fontGenerators = null;
+            fonts = null;
+        }
+    }
+
+    private static void tryInit() {
+        if (!initialized) {
+            Initialize();
+        }
+    }
+
+
+    /**
      * Schedules an asset for loading
      *
      * @param fPath the file path of the asset
@@ -299,15 +321,6 @@ public final class ResourceManager {
     private static void checkAdd() {
         if (loaded) {
             throw new RuntimeException("Can't load assets at this stage");
-        }
-    }
-
-    /**
-     * Calls Initialize if not already done so
-     */
-    private static void tryInit() {
-        if (!initialized) {
-            Initialize();
         }
     }
 }

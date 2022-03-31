@@ -13,7 +13,6 @@ import com.mygdx.game.Physics.CollisionCallBack;
 import com.mygdx.game.Physics.CollisionInfo;
 import com.mygdx.game.Physics.PhysicsBodyType;
 import java.util.Objects;
-import java.util.Random;
 
 import static com.mygdx.utils.Constants.BUILDING_SCALE;
 
@@ -110,6 +109,7 @@ public class Building extends Entity implements CollisionCallBack {
 
             Ship ship = ((CannonBall) info.a).getShooter();
             ship.plunder((int)(Math.random() * 10 + 15));
+            ship.reload((int)(Math.random() * 3 + 0));
             destroy();
             ((CannonBall) info.a).kill();
         }

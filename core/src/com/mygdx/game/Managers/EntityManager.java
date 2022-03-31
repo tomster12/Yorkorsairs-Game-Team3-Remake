@@ -27,6 +27,25 @@ public final class EntityManager {
     }
 
     /**
+     * Resets the manager if initialized
+     */
+    public static void reset() {
+        if (initialized) {
+            initialized = false;
+            entityNames = null;
+            entities = null;
+            components = null;
+        }
+    }
+
+    private static void tryInit() {
+        if (!initialized) {
+            Initialize();
+        }
+    }
+
+
+    /**
      * Dont call manually
      *
      * @param c the comp to add
@@ -99,15 +118,6 @@ public final class EntityManager {
         }
         for (Component c : components) {
             c.cleanUp();
-        }
-    }
-
-    /**
-     * automatically calls initialised if not done so
-     */
-    private static void tryInit() {
-        if (!initialized) {
-            Initialize();
         }
     }
 

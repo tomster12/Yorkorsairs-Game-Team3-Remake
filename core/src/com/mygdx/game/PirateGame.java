@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.mygdx.game.Managers.ResourceManager;
+import com.mygdx.game.Managers.*;
 import com.mygdx.game.Entitys.UI.EndScreen;
 import com.mygdx.game.Entitys.UI.GameScreen;
 import com.mygdx.game.Entitys.UI.MenuScreen;
@@ -14,11 +14,15 @@ import com.mygdx.game.Entitys.UI.MenuScreen;
  * Contains class instances of game UI screens.
  */
 public class PirateGame extends Game {
+
     public MenuScreen menu;
     public GameScreen game;
     public EndScreen end;
     public Stage stage;
     public Skin skin;
+
+    private int id_map; // Keep track in between resets
+
 
     /**
      * Create instances of game stage and UI screens.
@@ -26,15 +30,28 @@ public class PirateGame extends Game {
     @Override
     public void create() {
         // load resources
-        int id_ship = ResourceManager.addTexture("ship.png");
-        int id_map = ResourceManager.addTileMap("Map.tmx");
-        int atlas_id = ResourceManager.addTextureAtlas("Boats.txt");
-        int extras_id = ResourceManager.addTextureAtlas("UISkin/skin.atlas");
-        int buildings_id = ResourceManager.addTextureAtlas("Buildings.txt");
+        ResourceManager.addTexture("ship.png");
+        id_map = ResourceManager.addTileMap("Map.tmx");
+        ResourceManager.addTextureAtlas("Boats.txt");
+        ResourceManager.addTextureAtlas("UISkin/skin.atlas");
+        ResourceManager.addTextureAtlas("Buildings.txt");
         ResourceManager.addTexture("menuBG.jpg");
         ResourceManager.addTexture("Chest.png");
         ResourceManager.loadAssets();
-        // cant load any more resources after this point (just functionally I choose not to implement)
+        reload();
+    }
+
+
+    public void reload() {
+        // Reset all managers
+        RenderingManager.reset();
+        GameManager.reset();
+        PhysicsManager.reset();
+        CollisionManager.reset();
+        QuestManager.reset();
+        EntityManager.reset();
+
+        // Fully reset pirate game
         stage = new Stage(new ScreenViewport());
         createSkin();
         menu = new MenuScreen(this);
@@ -42,6 +59,7 @@ public class PirateGame extends Game {
         end = new EndScreen(this);
         setScreen(menu);
     }
+
 
     /**
      * Clean up prevent memory leeks
@@ -53,6 +71,7 @@ public class PirateGame extends Game {
         stage.dispose();
         skin.dispose();
     }
+
 
     /**
      * load ui skin from assets

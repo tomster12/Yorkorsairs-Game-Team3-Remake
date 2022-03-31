@@ -20,6 +20,7 @@ public final class RenderingManager {
     private static OrthographicCamera camera;
     private static SpriteBatch batch;
 
+
     public static void Initialize() {
         initialized = true;
         renderItems = new ArrayList<>();
@@ -35,6 +36,25 @@ public final class RenderingManager {
 
         for (int i = 0; i < RenderLayer.values().length; i++) {
             layers.add(new ArrayList<>());
+        }
+    }
+
+    /**
+     * Resets the manager if initialized
+     */
+    public static void reset() {
+        if (initialized) {
+            initialized = false;
+            renderItems = null;
+            layers = null;
+            camera = null;
+            batch = null;
+        }
+    }
+
+    private static void tryInit() {
+        if (!initialized) {
+            Initialize();
         }
     }
 
@@ -57,12 +77,6 @@ public final class RenderingManager {
         tryInit();
         renderItems.add(item);
         layers.get(layer.ordinal()).add(renderItems.size() - 1);
-    }
-
-    private static void tryInit() {
-        if (!initialized) {
-            Initialize();
-        }
     }
 
     /**

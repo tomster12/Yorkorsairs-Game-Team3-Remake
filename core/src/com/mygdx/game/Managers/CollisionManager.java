@@ -11,12 +11,21 @@ import com.mygdx.game.Physics.CollisionInfo;
 public class CollisionManager implements ContactListener {
     private static boolean initialized = false;
 
+
     public CollisionManager() {
         if (initialized) {
             throw new RuntimeException("Collision manager cant be instantiated more then once");
         }
         initialized = true;
     }
+
+    /**
+     * Resets the manager if initialized
+     */
+    public static void reset() {
+        initialized = false;
+    }
+
 
     /**
      * called for every contact that box2d detects prior to collision restitution (doesn't matter if it is a trigger/sensor)

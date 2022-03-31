@@ -27,7 +27,7 @@ public class RigidBody extends Component {
      * @param r    used for creating the fixture (aka the collider)
      * @param t    used for positioning and scaling the collider
      */
-    public RigidBody(PhysicsBodyType type, Renderable r, Transform t) {
+    public RigidBody(PhysicsBodyType type, Renderable r, com.mygdx.game.Components.Transform t) {
         this(type, r, t, false);
     }
 
@@ -39,7 +39,7 @@ public class RigidBody extends Component {
      * @param t         used for positioning and scaling the collider
      * @param isTrigger false allows for collision true doesn't
      */
-    public RigidBody(PhysicsBodyType type, Renderable r, Transform t, boolean isTrigger) {
+    public RigidBody(PhysicsBodyType type, Renderable r, com.mygdx.game.Components.Transform t, boolean isTrigger) {
         this();
         BodyDef def = new BodyDef();
         switch (type) {
@@ -130,7 +130,7 @@ public class RigidBody extends Component {
      * @param offset should plly offset
      */
     public void setPosition(Vector2 position, boolean offset) {
-        parent.getComponent(Transform.class).setPosition(position, false);
+        parent.getComponent(com.mygdx.game.Components.Transform.class).setPosition(position, false);
         Body b = PhysicsManager.getBody(bodyId);
         if (offset) position.add(halfDim);
         b.setTransform(position, 0);

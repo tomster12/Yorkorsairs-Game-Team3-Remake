@@ -11,8 +11,6 @@ import com.mygdx.game.Physics.CollisionCallBack;
 import com.mygdx.game.Physics.CollisionInfo;
 import com.mygdx.game.Physics.PhysicsBodyType;
 
-import static com.mygdx.utils.Constants.TILE_SIZE;
-
 /**
  * Cannonball entity and the methods to get it flying.
  */
@@ -91,10 +89,10 @@ public class CannonBall extends Entity implements CollisionCallBack {
 
         RigidBody rb = getComponent(RigidBody.class);
         Vector2 ta = dir.cpy().scl(speed * EntityManager.getDeltaTime());
-        Vector2 o = new Vector2(TILE_SIZE * t.getScale().x, TILE_SIZE * t.getScale().y);
-        Vector2 v = ta.cpy().sub(o);
+        // Vector2 o = new Vector2(TILE_SIZE * t.getScale().x, TILE_SIZE * t.getScale().y);
+        // Vector2 v = ta.cpy().sub(o); ?
         rb.setPosition(pos, true);
-        rb.setVelocity(v);
+        rb.setVelocity(ta.cpy());
 
         // Update variables
         shooter = sender;

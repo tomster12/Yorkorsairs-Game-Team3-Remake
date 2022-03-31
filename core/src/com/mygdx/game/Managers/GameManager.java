@@ -61,6 +61,29 @@ public final class GameManager {
     }
 
     /**
+     * Resets the manager if initialized
+     */
+    public static void reset() {
+        if (initialized) {
+            initialized = false;
+            factions = null;
+            ships = null;
+            colleges = null;
+            ballCache = null;
+            currentElement = 0;
+            settings = null;
+            mapGraph = null;
+        }
+    }
+
+    private static void tryInit() {
+        if (!initialized) {
+            Initialize();
+        }
+    }
+
+
+    /**
      * called every fram checks id the quests are completed
      */
     public static void update() {
@@ -140,12 +163,6 @@ public final class GameManager {
         tryInit();
         College c = new College(factionId);
         colleges.add(c);
-    }
-
-    private static void tryInit() {
-        if (!initialized) {
-            Initialize();
-        }
     }
 
     public static Faction getFaction(int factionId) {

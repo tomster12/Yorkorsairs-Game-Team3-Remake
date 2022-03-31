@@ -40,15 +40,6 @@ public class Pirate extends Component {
         targets.add(target);
     }
 
-    public int getPlunder() {
-        return plunder;
-    }
-
-    public void addPlunder(int money) {
-        System.out.println("Plundering " + money);
-        plunder += money;
-    }
-
     public Faction getFaction() {
         return GameManager.getFaction(factionId);
     }
@@ -74,15 +65,6 @@ public class Pirate extends Component {
         if (ammo == 0) return;
         ammo--;
         GameManager.shoot((Ship) parent, dir);
-    }
-
-    /**
-     * Adds ammo
-     *
-     * @param ammo amount to add
-     */
-    public void reload(int ammo) {
-        this.ammo += ammo;
     }
 
     public int getHealth() {
@@ -139,13 +121,25 @@ public class Pirate extends Component {
         isAlive = false;
     }
 
-    public void setAmmo(int ammo) {
-        this.ammo = ammo;
+    /**
+     * Adds ammo
+     *
+     * @param ammo amount to add
+     */
+    public void addAmmo(int ammo) {
+        this.ammo += ammo;
     }
+
+    public void addPlunder(int money) { plunder += money; }
 
     public int getAmmo() {
         return ammo;
     }
+
+    public int getPlunder() {
+        return plunder;
+    }
+
 
     public int targetCount() {
         return targets.size();

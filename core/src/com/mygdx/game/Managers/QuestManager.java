@@ -22,13 +22,31 @@ public class QuestManager {
     private static ArrayList<Quest> allQuests;
     private static Chest chest;
 
+
     public static void Initialize() {
         initialized = true;
         allQuests = new ArrayList<>();
         chest = new Chest();
-
         createRandomQuests();
     }
+
+    /**
+     * Resets the manager if initialized
+     */
+    public static void reset() {
+        if (initialized) {
+            initialized = false;
+            allQuests = null;
+            chest = null;
+        }
+    }
+
+    private static void tryInit() {
+        if (!initialized) {
+            Initialize();
+        }
+    }
+
 
     /**
      * Creates a random kill quest on a random college
@@ -133,12 +151,6 @@ public class QuestManager {
                 chest.setPosition(new Vector2(-1000, -1000));
                 break;
             }
-        }
-    }
-
-    private static void tryInit() {
-        if (!initialized) {
-            Initialize();
         }
     }
 

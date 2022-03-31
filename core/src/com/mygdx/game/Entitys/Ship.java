@@ -46,6 +46,7 @@ public class Ship extends Entity implements CollisionCallBack {
             shipDirections.put(new Vector2(-1, -1), "-dl");
         }
 
+        System.out.println("Setting up ship");
         Transform t = new Transform();
         t.setPosition(800, 800);
         Renderable r = new Renderable(3, "white-up", RenderLayer.Transparent);
@@ -69,6 +70,10 @@ public class Ship extends Entity implements CollisionCallBack {
 
     public void plunder(int money) {
         getComponent(Pirate.class).addPlunder(money);
+    }
+
+    public void reload(int ammo) {
+        getComponent(Pirate.class).addAmmo(ammo);
     }
 
     /**
@@ -138,6 +143,10 @@ public class Ship extends Entity implements CollisionCallBack {
 
     public int getPlunder() {
         return getComponent(Pirate.class).getPlunder();
+    }
+
+    public int getAmmo() {
+        return getComponent(Pirate.class).getAmmo();
     }
 
     public void shoot(Vector2 dir) { getComponent(Pirate.class).shoot(dir); }
