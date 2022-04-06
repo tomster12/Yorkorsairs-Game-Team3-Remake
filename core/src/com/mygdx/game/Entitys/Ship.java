@@ -46,7 +46,6 @@ public class Ship extends Entity implements CollisionCallBack {
             shipDirections.put(new Vector2(-1, -1), "-dl");
         }
 
-        System.out.println("Setting up ship");
         Transform t = new Transform();
         t.setPosition(800, 800);
         Renderable r = new Renderable(3, "white-up", RenderLayer.Transparent);
@@ -72,9 +71,9 @@ public class Ship extends Entity implements CollisionCallBack {
         getComponent(Pirate.class).addPlunder(money);
     }
 
-    public void reload(int ammo) {
-        getComponent(Pirate.class).addAmmo(ammo);
-    }
+    public void reload(int ammo) { getComponent(Pirate.class).addAmmo(ammo); }
+
+    public void level(float xp) { getComponent(Pirate.class).addXp(xp); }
 
     /**
      * Associates ship with faction and orients it to the default northern direction.

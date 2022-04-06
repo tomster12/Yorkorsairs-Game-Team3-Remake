@@ -11,11 +11,14 @@ import com.mygdx.utils.QueueFIFO;
  * Gives the concepts of health plunder, etc. Allows for firing of cannonballs, factions, death, targets
  */
 public class Pirate extends Component {
+
     private int factionId;
     private int plunder;
     protected boolean isAlive;
     private int health;
     private int ammo;
+    private float xp = 0;
+    private int level = 1;
     private final int attackDmg;
 
     /**
@@ -32,8 +35,8 @@ public class Pirate extends Component {
         isAlive = true;
         JsonValue starting = GameManager.getSettings().get("starting");
         health = starting.getInt("health");
-        attackDmg = starting.getInt("damage");
         ammo = starting.getInt("ammo");
+        attackDmg = starting.getInt("damage");
     }
 
     public void addTarget(Ship target) {
@@ -56,6 +59,18 @@ public class Pirate extends Component {
         }
     }
 
+
+    private void updateXp() {
+        // Check levelled up
+        float req = GameManager.getSettings().get("Level").getFloat("xpPerLevel");
+        if (xp > req) {
+            level++;
+            xp = xp - req;
+        }
+
+        // Update xp bar
+    }
+
     /**
      * Will shoot a cannonball assigning this.parent as the cannonball's parent (must be Ship atm)
      *
@@ -64,11 +79,9 @@ public class Pirate extends Component {
     public void shoot(Vector2 dir) {
         if (ammo == 0) return;
         ammo--;
-        GameManager.shoot((Ship) parent, dir);
-    }
-
-    public int getHealth() {
-        return health;
+        float inc = GameManager.getSettings().get("Level").getFloat("cannonSpeedMultIncrease");
+        float speedMult = 1.0f + level * inc;
+        GameManager.shoot((Ship) parent, dir, speedMult);
     }
 
     /**
@@ -126,18 +139,22 @@ public class Pirate extends Component {
      *
      * @param ammo amount to add
      */
-    public void addAmmo(int ammo) {
-        this.ammo += ammo;
-    }
+    public void addAmmo(int ammo) { this.ammo += ammo; }
 
-    public void addPlunder(int money) { plunder += money; }
+    public void addPlunder(int money) { this.plunder += plunder; }
 
-    public int getAmmo() {
-        return ammo;
-    }
+    public void addXp(float xp) { this.xp += xp; this.updateXp(); }
 
-    public int getPlunder() {
-        return plunder;
+    public int getAmmo() { return ammo; }
+
+    public int getPlunder() { return plunder; }
+
+    public float getXp() { return xp; }
+
+    public int getLevel() { return level; }
+
+    public int getHealth() {
+        return health;
     }
 
 

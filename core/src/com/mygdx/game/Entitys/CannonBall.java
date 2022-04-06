@@ -83,12 +83,12 @@ public class CannonBall extends Entity implements CollisionCallBack {
      * @param dir    2D vector direction for its movement
      * @param sender ship entity firing it
      */
-    public void fire(Vector2 pos, Vector2 dir, Ship sender) {
+    public void fire(Vector2 pos, Vector2 dir, Ship sender, float speedMult) {
         // Update components
         Transform t = getComponent(Transform.class);
 
         RigidBody rb = getComponent(RigidBody.class);
-        Vector2 ta = dir.cpy().scl(speed * EntityManager.getDeltaTime());
+        Vector2 ta = dir.cpy().scl(speed * speedMult * EntityManager.getDeltaTime());
         // Vector2 o = new Vector2(TILE_SIZE * t.getScale().x, TILE_SIZE * t.getScale().y);
         // Vector2 v = ta.cpy().sub(o); ?
         rb.setPosition(pos, true);

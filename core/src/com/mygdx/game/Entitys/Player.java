@@ -38,4 +38,12 @@ public class Player extends Ship {
     public int getAmmo() {
         return getComponent(Pirate.class).getAmmo();
     }
+
+    public float getXp() {
+        return getComponent(Pirate.class).getXp();
+    }
+
+    public int getLevel() {
+        return getComponent(Pirate.class).getLevel();
+    }
 }

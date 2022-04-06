@@ -20,6 +20,7 @@ public class GameScreen extends Page {
     private Label healthLabel;
     private Label dosh;
     private Label ammo;
+    private Label level;
     private final Label questDesc;
     private final Label questName;
     /*private final Label questComplete;
@@ -172,6 +173,7 @@ public class GameScreen extends Page {
         healthLabel.setText(String.valueOf(p.getHealth()));
         dosh.setText(String.valueOf(p.getPlunder()));
         ammo.setText(String.valueOf(p.getAmmo()));
+        level.setText("Lvl " +p.getLevel() + "    " + p.getXp() + "xp");
         if (!QuestManager.anyQuests()) {
             parent.end.win();
             parent.setScreen(parent.end);
@@ -198,7 +200,7 @@ public class GameScreen extends Page {
     }
 
     /**
-     * Draw UI elements showing player health, plunder, and ammo.
+     * Draw UI elements showing player health, plunder, ammo, and level
      */
     @Override
     protected void CreateActors() {
@@ -222,6 +224,12 @@ public class GameScreen extends Page {
         table.add(new Image(parent.skin.getDrawable("ball"))).top().left().size(1.25f * TILE_SIZE);
         ammo = new Label("N/A", parent.skin);
         table.add(ammo).top().left().size(50);
+
+        table.row();
+
+//        table.add(new Image(parent.skin.getDrawable("ball"))).top().left().size(1.25f * TILE_SIZE);
+        level = new Label("N/A", parent.skin);
+        table.add(level).top().left().size(50);
 
         table.top().left();
     }

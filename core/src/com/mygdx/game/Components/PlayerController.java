@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Entitys.Ship;
+import com.mygdx.game.Managers.GameManager;
 import com.mygdx.game.Managers.RenderingManager;
 
 import static com.mygdx.utils.Constants.HALF_DIMENSIONS;
@@ -39,14 +40,17 @@ public class PlayerController extends Component {
     @Override
     public void update() {
         super.update();
-        final float s = speed;
 
         Vector2 dir = getDirFromWASDInput();
         ((Ship) parent).setShipDirection(dir);
-        dir.scl(s);
+
+        Pirate p = parent.getComponent(Pirate.class);
+        float inc = GameManager.getSettings().get("Level").getFloat("playerSpeedIncrease");
+        float s = this.speed + inc * p.getLevel();
+        dir = dir.scl(s);
 
         RigidBody rb = parent.getComponent(RigidBody.class);
-        rb.setVelocity(dir);
+        rb.setVelocity(dir); // This doesnt work and i have absolutely no idea why
 
         RenderingManager.getCamera().position.set(new Vector3(player.getPosition(), 0.0f));
         RenderingManager.getCamera().update();

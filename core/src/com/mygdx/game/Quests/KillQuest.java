@@ -14,7 +14,9 @@ public class KillQuest extends Quest {
         super();
         name = "Kill the college";
         description = "KILL KILL KILL";
-        reward = 100;
+        plunderReward = 75;
+        xpReward = 80;
+        ammoReward = 20;
         target = null;
     }
 

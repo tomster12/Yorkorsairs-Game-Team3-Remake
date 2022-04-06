@@ -9,6 +9,11 @@
     "attackRange_tiles": 4.0,
     "ammo": 50
   },
+  "Level": {
+    "xpPerLevel": 100,
+    "playerSpeedIncrease": 50.0,
+    "cannonSpeedMultIncrease": 0.2
+  },
   "AI": {
     "maxSpeed": 500.0,
     "accelerationTime": 0.01,

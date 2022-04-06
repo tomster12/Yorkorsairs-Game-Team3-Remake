@@ -143,10 +143,14 @@ public class QuestManager {
             }
             boolean completed = q.checkCompleted(p);
             if (completed) {
-                p.plunder(q.getReward());
+                p.plunder(q.getPlunderReward());
+                p.level(q.getXpReward());
+                p.reload(q.getAmmoReward());
+
             } else if (q instanceof LocateQuest) {
                 chest.setPosition(((LocateQuest) q).getLocation());
                 break;
+
             } else {
                 chest.setPosition(new Vector2(-1000, -1000));
                 break;
