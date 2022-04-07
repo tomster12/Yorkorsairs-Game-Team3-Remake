@@ -1,11 +1,15 @@
 package com.mygdx.game.Entitys;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.Components.Pirate;
+import com.mygdx.game.Components.Renderable;
 import com.mygdx.game.Components.Transform;
 import com.mygdx.game.Faction;
 import com.mygdx.game.Managers.GameManager;
+import com.mygdx.game.Managers.RenderLayer;
+import com.mygdx.game.Managers.ResourceManager;
 import com.mygdx.utils.Utilities;
 
 import java.util.ArrayList;
@@ -14,8 +18,14 @@ import java.util.ArrayList;
  * Defines a college and its associated buildings.
  */
 public class College extends Entity {
+
     private static ArrayList<String> buildingNames;
     private final ArrayList<Building> buildings;
+    private Healthbar healthbar;
+
+    private float buildingCount;
+    private float aliveCount;
+
 
     public College() {
         super();
@@ -26,7 +36,11 @@ public class College extends Entity {
         buildingNames.add("clock");
         Transform t = new Transform();
         Pirate p = new Pirate();
+        int healthbar_id = ResourceManager.getId("healthbar.png");
+        Renderable r = new Renderable(healthbar_id, RenderLayer.Five);
         addComponents(t, p);
+
+        healthbar = new Healthbar(RenderLayer.Above);
     }
 
     /**
@@ -42,6 +56,8 @@ public class College extends Entity {
         Pirate p = getComponent(Pirate.class);
         p.setFactionId(factionId);
         spawn(f.getColour(), factionId);
+
+        healthbar.setPosition(t.getPosition().add(0, -15f));
     }
 
     /**
@@ -57,12 +73,14 @@ public class College extends Entity {
         ArrayList<Vector2> posList = new ArrayList<>();
         posList.add(new Vector2(0, 0));
 
+        buildingCount = 0;
         for (int i = 0; i < collegeSettings.getInt("numBuildings"); i++) {
             Vector2 pos = Utilities.randomPos(-radius, radius);
             pos = Utilities.floor(pos);
 
             if (!posList.contains(pos)) {
                 posList.add(pos);
+                buildingCount++;
 
                 pos = Utilities.tilesToDistance(pos).add(origin);
 
@@ -78,6 +96,8 @@ public class College extends Entity {
         Building flag = new Building(factionId, true);
         buildings.add(flag);
         flag.create(origin, colour);
+
+        healthbar.setMaxValue(buildingCount);
     }
 
     /**
@@ -85,15 +105,17 @@ public class College extends Entity {
      */
     public void isAlive() {
         boolean res = false;
+        aliveCount = 0;
         for (int i = 0; i < buildings.size() - 1; i++) {
             Building b = buildings.get(i);
             if (b.isAlive()) {
                 res = true;
+                aliveCount++;
+            } else {
             }
         }
-        if (!res) {
-            getComponent(Pirate.class).kill();
-        }
+        this.healthbar.setValue(aliveCount);
+        if (!res) getComponent(Pirate.class).kill();
     }
 
     @Override

@@ -9,5 +9,6 @@ public enum RenderLayer {
     Three,
     Four,
     Five,
-    Transparent
+    Transparent,
+    Above
 }

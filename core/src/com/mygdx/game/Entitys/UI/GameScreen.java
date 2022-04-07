@@ -21,6 +21,7 @@ public class GameScreen extends Page {
     private Label dosh;
     private Label ammo;
     private Label level;
+    private Label quests;
     private final Label questDesc;
     private final Label questName;
     /*private final Label questComplete;
@@ -174,6 +175,8 @@ public class GameScreen extends Page {
         dosh.setText(String.valueOf(p.getPlunder()));
         ammo.setText(String.valueOf(p.getAmmo()));
         level.setText("Lvl " +p.getLevel() + "    " + p.getXp() + "xp");
+        quests.setText(QuestManager.getQuestsCompleted() + " / " + QuestManager.getTotalQuests() + "    Quests complete");
+
         if (!QuestManager.anyQuests()) {
             parent.end.win();
             parent.setScreen(parent.end);
@@ -190,6 +193,7 @@ public class GameScreen extends Page {
             questName.setText(q.getName());
             questDesc.setText(q.getDescription());
         }
+
         /*if(!questComplete.getText().equals("")) {
             showTimer += EntityManager.getDeltaTime();
         }
@@ -230,6 +234,12 @@ public class GameScreen extends Page {
 //        table.add(new Image(parent.skin.getDrawable("ball"))).top().left().size(1.25f * TILE_SIZE);
         level = new Label("N/A", parent.skin);
         table.add(level).top().left().size(50);
+
+        table.row();
+
+        quests = new Label("N/A", parent.skin);
+        table.add(quests).top().left().size(50);
+
 
         table.top().left();
     }

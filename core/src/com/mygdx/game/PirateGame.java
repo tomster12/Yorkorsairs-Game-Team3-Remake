@@ -37,6 +37,8 @@ public class PirateGame extends Game {
         ResourceManager.addTextureAtlas("Buildings.txt");
         ResourceManager.addTexture("menuBG.jpg");
         ResourceManager.addTexture("Chest.png");
+        ResourceManager.addTexture("healthbar.png");
+        ResourceManager.addTexture("healthbarfill.png");
         ResourceManager.loadAssets();
         reload();
     }

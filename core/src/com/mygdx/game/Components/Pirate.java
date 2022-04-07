@@ -141,7 +141,7 @@ public class Pirate extends Component {
      */
     public void addAmmo(int ammo) { this.ammo += ammo; }
 
-    public void addPlunder(int money) { this.plunder += plunder; }
+    public void addPlunder(int plunder) { this.plunder += plunder; }
 
     public void addXp(float xp) { this.xp += xp; this.updateXp(); }
 

@@ -22,6 +22,9 @@ public class QuestManager {
     private static ArrayList<Quest> allQuests;
     private static Chest chest;
 
+    private static int totalQuests;
+    private static int questsCompleted;
+
 
     public static void Initialize() {
         initialized = true;
@@ -118,9 +121,8 @@ public class QuestManager {
         int primaryEnemyId = new Random().nextInt(4) + 2;
         ArrayList<Integer> exclude = new ArrayList<>();
         exclude.add(primaryEnemyId);
-        for (int i = 0; i < GameManager.getSettings().get("quests").getInt("count"); i++) {
-            rndQuest(exclude);
-        }
+        totalQuests = GameManager.getSettings().get("quests").getInt("count");
+        for (int i = 0; i < totalQuests; i++) rndQuest(exclude);
         College enemy = GameManager.getCollege(primaryEnemyId);
         addQuest(new KillQuest(enemy));
     }
@@ -137,8 +139,10 @@ public class QuestManager {
     public static void checkCompleted() {
         tryInit();
         Player p = GameManager.getPlayer();
+        questsCompleted = 0;
         for (Quest q : allQuests) {
             if (q.isCompleted()) {
+                questsCompleted++;
                 continue;
             }
             boolean completed = q.checkCompleted(p);
@@ -182,4 +186,9 @@ public class QuestManager {
         tryInit();
         return currentQuest() != null;
     }
+
+
+    public static int getTotalQuests() { return totalQuests; }
+
+    public static int getQuestsCompleted() { return questsCompleted; }
 }

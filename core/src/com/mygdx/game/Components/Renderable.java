@@ -12,7 +12,7 @@ import com.mygdx.game.Managers.ResourceManager;
  */
 public class Renderable extends Component {
     protected Sprite sprite;
-    private boolean isVisible;
+    protected boolean isVisible;
 
     /**
      * Called in other constructors, loads no textures by itself.
@@ -56,6 +56,7 @@ public class Renderable extends Component {
     @Override
     public void update() {
         super.update();
+
         if (sprite == null) return;
         Transform c = parent.getComponent(Transform.class);
         if (c == null) return;
@@ -70,9 +71,7 @@ public class Renderable extends Component {
     @Override
     public void render() {
         super.render();
-        if (sprite == null || !isVisible) {
-            return;
-        }
+        if (sprite == null || !isVisible) return;
         sprite.draw(RenderingManager.getBatch());
     }
 
