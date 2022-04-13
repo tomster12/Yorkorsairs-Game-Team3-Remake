@@ -118,7 +118,7 @@ public class Ship extends Entity implements CollisionCallBack {
     }
 
     /**
-     * will rotate the ship to face the direction (just changes the sprite doesn't actually rotate)
+     * will rotate the ship to face the right direction (just changes the sprite doesn't actually rotate)
      *
      * @param direction the dir to face (used to get the correct sprite from the texture atlas
      */
@@ -131,6 +131,7 @@ public class Ship extends Entity implements CollisionCallBack {
 
         try {
             r.setTexture(s);
+            
         } catch (Exception ignored) {
 
         }
