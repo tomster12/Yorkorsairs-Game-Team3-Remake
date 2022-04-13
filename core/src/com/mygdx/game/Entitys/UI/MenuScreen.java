@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.Managers.ResourceManager;
 import com.mygdx.game.PirateGame;
-import com.sun.prism.shader.Solid_ImagePattern_Loader;
 import org.junit.platform.commons.support.SearchOption;
 
 import static com.mygdx.utils.Constants.VIEWPORT_HEIGHT;
