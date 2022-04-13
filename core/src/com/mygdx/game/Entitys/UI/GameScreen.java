@@ -40,14 +40,8 @@ public class GameScreen extends Page {
         super(parent);
         INIT_CONSTANTS();
         PhysicsManager.Initialize(false);
-
-        /*int id_ship = ResourceManager.addTexture("ship.png");
-        int id_map = ResourceManager.addTileMap("Map.tmx");
-        int atlas_id = ResourceManager.addTextureAtlas("Boats.txt");
-        int extras_id = ResourceManager.addTextureAtlas("UISkin/skin.atlas");
-        int buildings_id = ResourceManager.addTextureAtlas("Buildings.txt");
-        ResourceManager.loadAssets();*/
-
+        int windowwidth = Gdx.graphics.getWidth()/3;
+        int windownheight = Gdx.graphics.getHeight()/10;
 
         GameManager.SpawnGame(id_map);
         //QuestManager.addQuest(new KillQuest(c));
@@ -81,7 +75,7 @@ public class GameScreen extends Page {
         Window tutWindow = new Window("Controls", parent.skin);
         Table table = new Table();
         tutWindow.add(table);
-        t1.add(tutWindow);
+        t1.add(tutWindow).size(windowwidth,windownheight);
 
         table.add(new Label("Move with", parent.skin)).top().left();
         table.add(new Image(parent.skin, "key-w"));
@@ -123,11 +117,15 @@ public class GameScreen extends Page {
         }
 
         GameManager.update();
+        super.render(delta);
         // show end screen if esc is pressed
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             parent.setScreen(parent.end);
         }
-        super.render(delta);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+            parent.setScreen(parent.Shop);
+        }
+
     }
 
     /**
@@ -143,7 +141,8 @@ public class GameScreen extends Page {
     }
 
     /**
-     * Resize camera, effectively setting the viewport to display game assets
+     * Resize
+     * a, effectively setting the viewport to display game assets
      * at pixel ratios other than 1:1.
      *
      * @param width  of camera viewport
@@ -157,7 +156,6 @@ public class GameScreen extends Page {
         cam.viewportWidth = width / ZOOM;
         cam.viewportHeight = height / ZOOM;
         cam.update();
-
         // ((Table) actors.get(0)).setFillParent(true);
     }
 

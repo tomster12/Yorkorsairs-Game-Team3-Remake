@@ -1,5 +1,6 @@
 package com.mygdx.game.Entitys;
 
+import com.badlogic.gdx.Screen;
 import com.mygdx.game.Components.Component;
 import com.mygdx.game.Components.ComponentEvent;
 import com.mygdx.game.Components.ComponentType;

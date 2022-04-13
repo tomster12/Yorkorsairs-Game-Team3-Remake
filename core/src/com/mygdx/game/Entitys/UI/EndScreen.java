@@ -39,20 +39,26 @@ public class EndScreen extends Page {
     @Override
     protected void CreateActors() {
         Table t = new Table();
+        int buttonwidth = Gdx.graphics.getWidth()/3;
+        int buttonheight = Gdx.graphics.getHeight()/10;
+        int fontscaleheader = Gdx.graphics.getHeight()/300;
+        int fontscalebutton = Gdx.graphics.getHeight()/500;
         t.setBackground(new TextureRegionDrawable(ResourceManager.getTexture("menuBG.jpg")));
 
         float space = VIEWPORT_HEIGHT * 0.25f;
         t.setFillParent(true);
         actors.add(t);
         wonText = new Label("You have lost", parent.skin);
-        wonText.setFontScale(2);
+        wonText.setFontScale(fontscaleheader);
         t.top();
         t.add(wonText).top().spaceBottom(space);
         t.row();
         playerStats = new Label("Player Stats:\n", parent.skin);
+        playerStats.setFontScale(fontscaleheader);
         t.add(playerStats).spaceBottom(space);
         t.row();
         TextButton b = new TextButton("Exit", parent.skin);
+        b.getLabel().setFontScale(fontscalebutton);
         b.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -61,7 +67,7 @@ public class EndScreen extends Page {
                 // System.exit(0);
             }
         });
-        t.add(b);
+        t.add(b).size(buttonwidth, buttonheight);
     }
 
     @Override
@@ -89,6 +95,36 @@ public class EndScreen extends Page {
     public void resize(int width, int height) {
         super.resize(width, height);
         Table t = (Table) actors.get(0);
-        t.setBackground(new TextureRegionDrawable(ResourceManager.getTexture("menuBG.jpg"))); // prevent the bg being stretched
+        t.clearChildren();
+        t.setBackground(new TextureRegionDrawable(ResourceManager.getTexture("menuBG.jpg")));
+        int buttonwidth = Gdx.graphics.getWidth()/3;
+        int buttonheight = Gdx.graphics.getHeight()/10;
+        int fontscaleheader = Gdx.graphics.getHeight()/300;
+        int fontscalebutton = Gdx.graphics.getHeight()/500;
+
+        float space = VIEWPORT_HEIGHT * 0.25f;
+        t.setFillParent(true);
+        actors.add(t);
+        wonText = new Label("You have lost", parent.skin);
+        wonText.setFontScale(fontscaleheader);
+        t.top();
+        t.add(wonText).top().spaceBottom(space);
+        t.row();
+        playerStats = new Label("Player Stats:\n", parent.skin);
+        show();
+        playerStats.setFontScale(fontscaleheader);
+        t.add(playerStats).spaceBottom(space);
+        t.row();
+        TextButton b = new TextButton("Exit", parent.skin);
+        b.getLabel().setFontScale(fontscalebutton);
+        b.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                parent.reload();
+                // Gdx.app.exit();
+                // System.exit(0);
+            }
+        });
+        t.add(b).size(buttonwidth, buttonheight);
     }
 }

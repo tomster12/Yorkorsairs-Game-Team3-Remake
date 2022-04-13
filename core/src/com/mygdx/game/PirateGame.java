@@ -2,9 +2,11 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.Entitys.UI.ShopScreen;
 import com.mygdx.game.Managers.*;
 import com.mygdx.game.Entitys.UI.EndScreen;
 import com.mygdx.game.Entitys.UI.GameScreen;
@@ -20,6 +22,7 @@ public class PirateGame extends Game {
     public EndScreen end;
     public Stage stage;
     public Skin skin;
+    public ShopScreen Shop;
 
     private int id_map; // Keep track in between resets
 
@@ -59,12 +62,13 @@ public class PirateGame extends Game {
         menu = new MenuScreen(this);
         game = new GameScreen(this, id_map);
         end = new EndScreen(this);
+        Shop = new ShopScreen(this);
         setScreen(menu);
     }
 
 
     /**
-     * Clean up prevent memory leeks
+     * Clean up prevent memory leaks
      */
     @Override
     public void dispose() {
@@ -72,6 +76,7 @@ public class PirateGame extends Game {
         game.dispose();
         stage.dispose();
         skin.dispose();
+        Shop.dispose();
     }
 
 
