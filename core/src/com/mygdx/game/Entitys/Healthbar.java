@@ -12,7 +12,9 @@ import com.mygdx.game.Managers.ResourceManager;
  */
 public class Healthbar extends Entity {
 
-    HealthbarRenderable hr;
+    private HealthbarRenderable hr;
+
+    private Vector2 offset = new Vector2(0.0f, 0.0f);
 
 
     public Healthbar(RenderLayer layer) {
@@ -24,7 +26,11 @@ public class Healthbar extends Entity {
     }
 
 
-    public void setPosition(Vector2 pos) { getComponent(Transform.class).setPosition(pos); }
+    public void setPosition(Vector2 pos) { getComponent(Transform.class).setPosition(pos.cpy().add(offset)); }
+
+    public void setScale(float x, float y) { getComponent(Transform.class).setScale(x, y); }
+
+    public void setOffset(Vector2 offset_) { offset = offset_; }
 
     public void setValue(float value) { hr.setValue(value); }
     public void setMaxValue(float value) { hr.setMaxValue(value); }

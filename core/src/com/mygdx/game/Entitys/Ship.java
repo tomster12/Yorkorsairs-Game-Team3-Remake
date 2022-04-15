@@ -1,5 +1,7 @@
 package com.mygdx.game.Entitys;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ObjectMap;
@@ -7,12 +9,14 @@ import com.mygdx.game.Components.Pirate;
 import com.mygdx.game.Components.Renderable;
 import com.mygdx.game.Components.RigidBody;
 import com.mygdx.game.Components.Transform;
+import com.mygdx.game.Faction;
 import com.mygdx.game.Managers.GameManager;
 import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Managers.ResourceManager;
 import com.mygdx.game.Physics.CollisionCallBack;
 import com.mygdx.game.Physics.CollisionInfo;
 import com.mygdx.game.Physics.PhysicsBodyType;
+import com.mygdx.game.PirateGame;
 import com.mygdx.utils.Utilities;
 
 import java.util.Objects;
@@ -24,7 +28,9 @@ public class Ship extends Entity implements CollisionCallBack {
     private static int shipCount = 0;
     public static ObjectMap<Vector2, String> shipDirections;
 
+    private Transform t;
     private final Vector2 currentDir;
+    private Healthbar healthbar;
 
     /**
      * Creates a ship entity, containing Transform, Renderable, RigidBody, and Pirate components.
@@ -33,6 +39,7 @@ public class Ship extends Entity implements CollisionCallBack {
         super(4);
         currentDir = new Vector2();
         setName("Ship (" + shipCount++ + ")"); // each ship has a unique name
+//        maxHealth = GameManager.getSettings().get("").getFloat("");
 
         if (shipDirections == null) {
             shipDirections = new ObjectMap<>();
@@ -46,7 +53,7 @@ public class Ship extends Entity implements CollisionCallBack {
             shipDirections.put(new Vector2(-1, -1), "-dl");
         }
 
-        Transform t = new Transform();
+        t = new Transform();
         t.setPosition(800, 800);
         Renderable r = new Renderable(3, "white-up", RenderLayer.Transparent);
         RigidBody rb = new RigidBody(PhysicsBodyType.Dynamic, r, t);
@@ -54,10 +61,24 @@ public class Ship extends Entity implements CollisionCallBack {
 
         Pirate p = new Pirate();
 
-        // rb.setCallback(this);
-
         addComponents(t, r, rb, p);
+
+        healthbar = new Healthbar(RenderLayer.Above);
+        healthbar.setPosition(t.getPosition().add(0, -15f));
+        healthbar.setScale(0.3f, 0.3f);
+        healthbar.setOffset(new Vector2(r.getSprite().getWidth() * 0.5f, -10.0f));
+        healthbar.setMaxValue(getMaxHealth());
     }
+
+
+    @Override
+    public void update() {
+        super.update();
+
+        healthbar.setPosition(t.getPosition());
+        healthbar.setValue(getHealth());
+    }
+
 
     public boolean isAlive() {
         return getComponent(Pirate.class).getHealth() > 0;
@@ -137,9 +158,9 @@ public class Ship extends Entity implements CollisionCallBack {
         }
     }
 
-    public int getHealth() {
-        return getComponent(Pirate.class).getHealth();
-    }
+    public int getHealth() { return getComponent(Pirate.class).getHealth(); }
+
+    public int getMaxHealth() { return getComponent(Pirate.class).getMaxHealth(); }
 
     public int getPlunder() {
         return getComponent(Pirate.class).getPlunder();
@@ -177,7 +198,32 @@ public class Ship extends Entity implements CollisionCallBack {
      */
     @Override
     public void EnterTrigger(CollisionInfo info) {
-        if (this instanceof Player && !(info.b instanceof Player)) {
+        // Player TRIGGER ship - only calls on PLAYER for some reason - hence the else call
+        // Otherwise works normally - meaning NPCShip override will call correctly for cannonball but not player^
+
+        if (info.a instanceof CannonBall && isAlive()) {
+            CannonBall ball = (CannonBall) info.a;
+
+            // the ball if from the same faction
+            Faction ballFaction = ball.getShooter().getComponent(Pirate.class).getFaction();
+            Faction thisFaction = getComponent(Pirate.class).getFaction();
+            if (Objects.equals(ballFaction.getName(), thisFaction.getName())) return;
+
+            getComponent(Pirate.class).takeDamage(ball.getDamage());
+            ball.kill();
+
+            if (!isAlive()) {
+                Ship ship = ball.getShooter();
+                ship.plunder((int) (Math.random() * 10 + 15));
+                ship.reload((int) (Math.random() * 2 + 0));
+                ship.level((int) (Math.random() * 10 + 15));
+
+                if (this instanceof Player) {
+                    PirateGame.getInstance().setScreen(PirateGame.getInstance().end);
+                }
+            }
+
+        } else if (this instanceof Player && !(info.b instanceof Player)) {
             ((CollisionCallBack) info.b).EnterTrigger(info);
         }
     }

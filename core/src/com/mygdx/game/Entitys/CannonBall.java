@@ -18,6 +18,7 @@ public class CannonBall extends Entity implements CollisionCallBack {
 
     private static final int MAX_AGE = 5;
     private static float speed = 0.0f;
+    private float damage = 0;
 
     private boolean isAlive = false;
     private boolean shouldBeAlive = false;
@@ -61,7 +62,6 @@ public class CannonBall extends Entity implements CollisionCallBack {
         if (shouldBeAlive != isAlive) {
 
             if (!shouldBeAlive) {
-                System.out.println("Dying");
                 getComponent(Renderable.class).hide();
                 getComponent(RigidBody.class).setPosition(new Vector2(-1000, -1000));
                 getComponent(RigidBody.class).setVelocity(0, 0);
@@ -83,7 +83,7 @@ public class CannonBall extends Entity implements CollisionCallBack {
      * @param dir    2D vector direction for its movement
      * @param sender ship entity firing it
      */
-    public void fire(Vector2 pos, Vector2 dir, Ship sender, float speedMult) {
+    public void fire(Vector2 pos, Vector2 dir, Ship sender, float attackDamage, float speedMult) {
         // Update components
         Transform t = getComponent(Transform.class);
 
@@ -95,6 +95,7 @@ public class CannonBall extends Entity implements CollisionCallBack {
         rb.setVelocity(ta.cpy());
 
         // Update variables
+        damage = attackDamage;
         shooter = sender;
         shouldBeAlive = true;
     }
@@ -105,8 +106,9 @@ public class CannonBall extends Entity implements CollisionCallBack {
      */
     public void kill() { shouldBeAlive = false; }
 
-
     public Ship getShooter() { return shooter; }
+
+    public float getDamage() { return damage; }
 
 
     @Override

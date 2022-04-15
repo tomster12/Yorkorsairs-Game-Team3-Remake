@@ -16,6 +16,7 @@ public class Pirate extends Component {
     private int plunder;
     protected boolean isAlive;
     private int health;
+    private int maxHealth;
     private int ammo;
     private float xp = 0;
     private int level = 1;
@@ -35,6 +36,7 @@ public class Pirate extends Component {
         isAlive = true;
         JsonValue starting = GameManager.getSettings().get("starting");
         health = starting.getInt("health");
+        maxHealth = health;
         ammo = starting.getInt("ammo");
         attackDmg = starting.getInt("damage");
     }
@@ -81,7 +83,7 @@ public class Pirate extends Component {
         ammo--;
         float inc = GameManager.getSettings().get("Level").getFloat("cannonSpeedMultIncrease");
         float speedMult = 1.0f + level * inc;
-        GameManager.shoot((Ship) parent, dir, speedMult);
+        GameManager.shoot((Ship) parent, dir, attackDmg, speedMult);
     }
 
     /**
@@ -155,6 +157,10 @@ public class Pirate extends Component {
 
     public int getHealth() {
         return health;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
     }
 
 

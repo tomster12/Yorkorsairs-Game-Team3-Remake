@@ -1,5 +1,6 @@
 package com.mygdx.game.Entitys;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
 import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.ai.steer.behaviors.Arrive;
@@ -16,6 +17,7 @@ import com.mygdx.game.Physics.CollisionInfo;
 import com.mygdx.utils.QueueFIFO;
 import com.mygdx.utils.Utilities;
 
+import java.sql.Time;
 import java.util.Objects;
 
 /**
@@ -25,6 +27,8 @@ public class NPCShip extends Ship implements CollisionCallBack {
     public StateMachine<NPCShip, EnemyState> stateMachine;
     private static JsonValue AISettings;
     private final QueueFIFO<Vector2> path;
+    private float shootTimer;
+    private float shootTimerMax;
 
     /**
      * Creates an initial state machine
@@ -33,26 +37,21 @@ public class NPCShip extends Ship implements CollisionCallBack {
         super();
         path = new QueueFIFO<>();
 
-        if (AISettings == null) {
-            AISettings = GameManager.getSettings().get("AI");
-        }
+        if (AISettings == null) AISettings = GameManager.getSettings().get("AI");
+        JsonValue starting = GameManager.getSettings().get("starting");
 
         stateMachine = new DefaultStateMachine<>(this, EnemyState.WANDER);
 
         setName("NPC");
         AINavigation nav = new AINavigation();
-
         addComponent(nav);
 
-
         RigidBody rb = getComponent(RigidBody.class);
-        // rb.setCallback(this);
-
-        JsonValue starting = GameManager.getSettings().get("starting");
-
-        // agro trigger
+        rb.setCallback(this);
         rb.addTrigger(Utilities.tilesToDistance(starting.getFloat("argoRange_tiles")), "agro");
 
+        shootTimer = 0.0f;
+        shootTimerMax = AISettings.getFloat("shootTimer");
     }
 
     /**
@@ -70,9 +69,15 @@ public class NPCShip extends Ship implements CollisionCallBack {
     @Override
     public void update() {
         super.update();
+
+        if (!isAlive()) {
+            stopMovement();
+            return;
+        }
+
         stateMachine.update();
 
-        // System.out.println(getComponent(Pirate.class).targetCount());
+        if (shootTimer > 0.0f) shootTimer = Math.max(0.0f, shootTimer - Gdx.graphics.getDeltaTime());
     }
 
     /**
@@ -119,6 +124,21 @@ public class NPCShip extends Ship implements CollisionCallBack {
 
     }
 
+
+    /**
+     * As long as is off cooldown, will shoot towards target
+     */
+    public void shootTarget() {
+        if (getTarget() == null) {
+            return;
+        }
+
+        if (shootTimer <= 0.0f) {
+            shoot(getTarget().getPosition().cpy().sub(getPosition()).nor());
+            shootTimer = shootTimerMax;
+        }
+    }
+
     @Override
     public void BeginContact(CollisionInfo info) {
 
@@ -136,17 +156,15 @@ public class NPCShip extends Ship implements CollisionCallBack {
      */
     @Override
     public void EnterTrigger(CollisionInfo info) {
-        if (!(info.a instanceof Ship)) {
-            return;
-        }
-        Ship other = (Ship) info.a;
-        if (Objects.equals(other.getComponent(Pirate.class).getFaction().getName(), getComponent(Pirate.class).getFaction().getName())) {
-            // is the same faction
-            return;
-        }
-        // add the new collision as a new target
-        Pirate pirate = getComponent(Pirate.class);
-        pirate.addTarget(other);
+
+        if (info.fB.getUserData() == "agro") {
+            if (info.a instanceof Ship) {
+                Ship other = (Ship) info.a;
+                if (Objects.equals(other.getComponent(Pirate.class).getFaction().getName(), getComponent(Pirate.class).getFaction().getName())) return;
+                getComponent(Pirate.class).addTarget(other);
+            }
+
+        } else super.EnterTrigger(info);
     }
 
     /**
@@ -156,17 +174,20 @@ public class NPCShip extends Ship implements CollisionCallBack {
      */
     @Override
     public void ExitTrigger(CollisionInfo info) {
-        if (!(info.a instanceof Ship)) {
-            return;
-        }
-        Pirate pirate = getComponent(Pirate.class);
-        Ship o = (Ship) info.a;
-        // remove the object from the targets list
-        for (Ship targ : pirate.getTargets()) {
-            if (targ == o) {
-                pirate.getTargets().remove(targ);
-                break;
+
+        if (info.fB.getUserData() == "agro") {
+            if (info.a instanceof Ship) {
+                Pirate pirate = getComponent(Pirate.class);
+                Ship o = (Ship) info.a;
+                // remove the object from the targets list
+                for (Ship targ : pirate.getTargets()) {
+                    if (targ == o) {
+                        pirate.getTargets().remove(targ);
+                        break;
+                    }
+                }
             }
-        }
+
+        } else super.ExitTrigger(info);
     }
 }

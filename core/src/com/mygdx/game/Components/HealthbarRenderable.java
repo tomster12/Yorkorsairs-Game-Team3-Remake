@@ -1,5 +1,6 @@
 package com.mygdx.game.Components;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
@@ -41,7 +42,16 @@ public class HealthbarRenderable extends Renderable {
         sprite.setOriginBasedPosition(p.x, p.y);
         fillSprite.setOriginBasedPosition(p.x, p.y);
         fillSprite.setRotation(MathUtils.radiansToDegrees * c.getRotation());
-        fillSprite.setScale(value / maxValue, 1.0f);
+        fillSprite.setScale((value / maxValue) * s.x, s.y);
+
+        if (value == 0) {
+            fillSprite.setColor(Color.BLACK);
+            fillSprite.setScale(s.x, s.y);
+
+        } else {
+            fillSprite.setColor(Color.WHITE);
+            fillSprite.setScale((value / maxValue) * s.x, s.y);
+        }
     }
 
 

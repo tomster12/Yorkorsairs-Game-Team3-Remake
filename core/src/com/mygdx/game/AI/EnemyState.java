@@ -64,6 +64,9 @@ public enum EnemyState implements State<NPCShip> {
         public void update(NPCShip e) {
             super.update(e);
             //System.out.println("ATTACK");
+
+            // TODO: Call new shootTarget() function on NPCShip
+            e.shootTarget();
         }
     };
 

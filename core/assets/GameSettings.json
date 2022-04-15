@@ -4,7 +4,7 @@
     "damage": 10.0,
     "plunder": 0,
     "playerSpeed": 100.0,
-    "cannonSpeed": 10000.0,
+    "cannonSpeed": 15000.0,
     "argoRange_tiles": 9.0,
     "attackRange_tiles": 4.0,
     "ammo": 50
@@ -18,7 +18,8 @@
     "maxSpeed": 500.0,
     "accelerationTime": 0.01,
     "arrivalTolerance": 32.0,
-    "slowRadius": 64.0
+    "slowRadius": 64.0,
+    "shootTimer": 0.7
   },
   "factions": [
     {

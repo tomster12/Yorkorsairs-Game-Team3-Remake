@@ -17,6 +17,8 @@ import com.mygdx.game.Entitys.UI.MenuScreen;
  */
 public class PirateGame extends Game {
 
+    private static PirateGame instance;
+
     public MenuScreen menu;
     public GameScreen game;
     public EndScreen end;
@@ -25,6 +27,9 @@ public class PirateGame extends Game {
     public ShopScreen Shop;
 
     private int id_map; // Keep track in between resets
+
+
+    public PirateGame() { instance = this; }
 
 
     /**
@@ -66,6 +71,8 @@ public class PirateGame extends Game {
         setScreen(menu);
     }
 
+
+    public static PirateGame getInstance() { return instance; }
 
     /**
      * Clean up prevent memory leaks

@@ -36,11 +36,10 @@ public class College extends Entity {
         buildingNames.add("clock");
         Transform t = new Transform();
         Pirate p = new Pirate();
-        int healthbar_id = ResourceManager.getId("healthbar.png");
-        Renderable r = new Renderable(healthbar_id, RenderLayer.Five);
         addComponents(t, p);
 
         healthbar = new Healthbar(RenderLayer.Above);
+        healthbar.setOffset(new Vector2(0, -15f));
     }
 
     /**
@@ -57,7 +56,7 @@ public class College extends Entity {
         p.setFactionId(factionId);
         spawn(f.getColour(), factionId);
 
-        healthbar.setPosition(t.getPosition().add(0, -15f));
+        healthbar.setPosition(t.getPosition());
     }
 
     /**

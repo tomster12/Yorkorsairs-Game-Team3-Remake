@@ -191,10 +191,10 @@ public final class GameManager {
      * @param p   parent
      * @param dir shoot direction
      */
-    public static void shoot(Ship p, Vector2 dir, float speedMult) {
+    public static void shoot(Ship p, Vector2 dir, float attackDamage, float speedMult) {
         Vector2 pos = p.getComponent(Transform.class).getPosition().cpy();
         //pos.add(dir.x * TILE_SIZE * 0.5f, dir.y * TILE_SIZE * 0.5f);
-        ballCache.get(currentElement++).fire(pos, dir, p, speedMult);
+        ballCache.get(currentElement++).fire(pos, dir, p, attackDamage, speedMult);
         currentElement %= cacheSize;
     }
 

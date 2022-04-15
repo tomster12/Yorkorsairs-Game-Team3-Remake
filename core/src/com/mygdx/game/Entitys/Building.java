@@ -99,7 +99,7 @@ public class Building extends Entity implements CollisionCallBack {
      */
     @Override
     public void EnterTrigger(CollisionInfo info) {
-        if (info.a instanceof CannonBall && isAlive()) {
+        if (info.a instanceof CannonBall && isAlive() && !isFlag) {
             CannonBall b = (CannonBall) info.a;
 
             // the ball if from the same faction
