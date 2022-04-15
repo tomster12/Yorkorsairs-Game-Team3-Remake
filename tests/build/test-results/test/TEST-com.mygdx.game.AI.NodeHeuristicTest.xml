@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.mygdx.game.AI.NodeHeuristicTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-04-15T15:21:41" hostname="DESKTOP-BJ0OGS9" time="0.051">
+<testsuite name="com.mygdx.game.AI.NodeHeuristicTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-04-15T16:03:38" hostname="DESKTOP-BJ0OGS9" time="0.997">
   <properties/>
-  <testcase name="EuclideanHeuristicTest()" classname="com.mygdx.game.AI.NodeHeuristicTest" time="0.051"/>
+  <testcase name="EuclideanHeuristicTest()" classname="com.mygdx.game.AI.NodeHeuristicTest" time="0.997"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

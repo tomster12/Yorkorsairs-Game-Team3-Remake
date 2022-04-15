@@ -1,5 +1,5 @@
-com/mygdx/game/AI/NodeTest.java
- com.mygdx.game.AI.NodeTest
+com/mygdx/game/Components/PirateTest.java
+ com.mygdx.game.Components.PirateTest
 com/mygdx/game/AI/PathTest.java
  com.mygdx.game.AI.PathTest
 com/mygdx/game/AI/NodeHeuristicTest.java
@@ -10,5 +10,5 @@ com/mygdx/game/Quests/LocateQuestTest.java
  com.mygdx.game.Quests.LocateQuestTest
 com/mygdx/game/Components/TransformTest.java
  com.mygdx.game.Components.TransformTest
-com/mygdx/game/Components/PirateTest.java
- com.mygdx.game.Components.PirateTest
+com/mygdx/game/AI/NodeTest.java
+ com.mygdx.game.AI.NodeTest
