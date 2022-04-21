@@ -13,6 +13,7 @@ import com.mygdx.game.Managers.ResourceManager;
 public class Renderable extends Component {
     protected Sprite sprite;
     protected boolean isVisible;
+    protected RenderLayer layer;
 
     /**
      * Called in other constructors, loads no textures by itself.
@@ -23,6 +24,7 @@ public class Renderable extends Component {
         type = ComponentType.Renderable;
         sprite = new Sprite();
         RenderingManager.addItem(this, RenderLayer.Transparent);
+        this.layer = RenderLayer.Transparent;
     }
 
     /**
@@ -32,9 +34,12 @@ public class Renderable extends Component {
      * @param layer the rendering layer
      */
     public Renderable(int texId, RenderLayer layer) {
-        this();
+        super();
+        isVisible = true;
+        type = ComponentType.Renderable;
         sprite = new Sprite(ResourceManager.getTexture(texId));
         RenderingManager.addItem(this, layer);
+        this.layer = layer;
     }
 
     /**
@@ -45,9 +50,21 @@ public class Renderable extends Component {
      * @param layer   the rendering layer
      */
     public Renderable(int atlasId, String texName, RenderLayer layer) {
-        this();
+        super();
+        isVisible = true;
+        type = ComponentType.Renderable;
         sprite = new Sprite(ResourceManager.getSprite(atlasId, texName));
         RenderingManager.addItem(this, layer);
+        this.layer = layer;
+    }
+
+    /**
+     * Remove override to include RenderingManager
+     */
+    @Override
+    public void remove() {
+        super.remove();
+        RenderingManager.removeItem(this, layer);
     }
 
     /**

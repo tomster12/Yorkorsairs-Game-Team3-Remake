@@ -18,10 +18,19 @@ public class Entity {
     private String entityName;
     private final ArrayList<Component> components;
 
+
     public Entity() {
         components = new ArrayList<>();
         entityName = "Entity (" + ++entityCount + ")"; // makes ure by default every entity has a unique name (although it's not automatically important if they don't)
         EntityManager.addEntity(this);
+    }
+
+    /**
+     * Removes from entity manager
+     */
+    public void remove() {
+        for (Component c : components) c.remove();
+        EntityManager.removeEntity(this);
     }
 
     /**

@@ -14,6 +14,22 @@
     "playerSpeedIncrease": 50.0,
     "cannonSpeedMultIncrease": 0.2
   },
+  "events": {
+    "maxConcurrent": 2,
+    "durationMin": 6,
+    "durationMax": 7,
+    "spawnChance": 1.0,
+    "spawnTimerMax": 3,
+    "zones": [
+      15, 12,
+      22, 25,
+      35, 20
+    ],
+
+    "storm": {
+      "range": 8
+    }
+  },
   "AI": {
     "maxSpeed": 500.0,
     "accelerationTime": 0.01,

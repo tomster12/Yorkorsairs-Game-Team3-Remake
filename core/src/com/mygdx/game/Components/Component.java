@@ -15,12 +15,20 @@ public abstract class Component {
     protected ArrayList<ComponentType> requirements;
     protected boolean reqsMet;
 
+
     protected Component() {
         reqsMet = false;
         type = ComponentType.Unknown;
         parent = null;
         requirements = new ArrayList<>();
         EntityManager.addComponent(this);
+    }
+
+    /**
+     * Removes from entity manager
+     */
+    public void remove() {
+        EntityManager.removeComponent(this);
     }
 
     public void setParent(Entity e) {

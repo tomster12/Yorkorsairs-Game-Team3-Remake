@@ -39,18 +39,21 @@ public class GameScreen extends Page {
     public GameScreen(PirateGame parent, int id_map) {
         super(parent);
         INIT_CONSTANTS();
-        PhysicsManager.Initialize(false);
         int windowwidth = Gdx.graphics.getWidth()/3;
         int windownheight = Gdx.graphics.getHeight()/10;
 
+        PhysicsManager.Initialize(false);
+
         GameManager.SpawnGame(id_map);
-        //QuestManager.addQuest(new KillQuest(c));
+
+        EventManager.SpawnEvents();
 
         EntityManager.raiseEvents(ComponentEvent.Awake, ComponentEvent.Start);
 
+        //QuestManager.addQuest(new KillQuest(c));
         Window questWindow = new Window("Current Quest", parent.skin);
-
         Quest q = QuestManager.currentQuest();
+
         Table t = new Table();
         questName = new Label("NAME", parent.skin);
         t.add(questName);
@@ -60,6 +63,7 @@ public class GameScreen extends Page {
             questName.setText(q.getName());
             questDesc.setText(q.getDescription());
         }
+
         /*questComplete = new Label("", parent.skin);
         actors.add(questComplete);*/
 
@@ -117,15 +121,13 @@ public class GameScreen extends Page {
         }
 
         GameManager.update();
-        super.render(delta);
-        // show end screen if esc is pressed
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            parent.setScreen(parent.end);
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            parent.setScreen(parent.Shop);
-        }
+        EventManager.update();
 
+        super.render(delta);
+
+        // show end screen if esc is pressed
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) parent.setScreen(parent.end);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) parent.setScreen(parent.Shop);
     }
 
     /**

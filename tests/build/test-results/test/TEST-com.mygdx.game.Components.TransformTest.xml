@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.mygdx.game.Components.TransformTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-04-15T16:03:39" hostname="DESKTOP-BJ0OGS9" time="0.019">
+<testsuite name="com.mygdx.game.Components.TransformTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-04-20T14:59:00" hostname="DESKTOP-BJ0OGS9" time="0.008">
   <properties/>
   <testcase name="TransformSetRotateTest()" classname="com.mygdx.game.Components.TransformTest" time="0.002"/>
-  <testcase name="TransformSetScaleTest()" classname="com.mygdx.game.Components.TransformTest" time="0.003"/>
+  <testcase name="TransformSetScaleTest()" classname="com.mygdx.game.Components.TransformTest" time="0.001"/>
   <testcase name="TransformVecToAngleTest()" classname="com.mygdx.game.Components.TransformTest" time="0.002"/>
-  <testcase name="TransformSetPosTest()" classname="com.mygdx.game.Components.TransformTest" time="0.001"/>
+  <testcase name="TransformSetPosTest()" classname="com.mygdx.game.Components.TransformTest" time="0.0"/>
   <testcase name="TransformAngleToVecTest()" classname="com.mygdx.game.Components.TransformTest" time="0.001"/>
-  <testcase name="TransformSetOrientationTest()" classname="com.mygdx.game.Components.TransformTest" time="0.0"/>
+  <testcase name="TransformSetOrientationTest()" classname="com.mygdx.game.Components.TransformTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

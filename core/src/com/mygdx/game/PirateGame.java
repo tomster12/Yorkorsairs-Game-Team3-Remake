@@ -2,7 +2,6 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -47,14 +46,16 @@ public class PirateGame extends Game {
         ResourceManager.addTexture("Chest.png");
         ResourceManager.addTexture("healthbar.png");
         ResourceManager.addTexture("healthbarfill.png");
+        ResourceManager.addTexture("storm.png");
         ResourceManager.loadAssets();
         reload();
     }
 
 
     public void reload() {
-        // Reset all managers
+        // Reset all managers with state
         RenderingManager.reset();
+        EventManager.reset();
         GameManager.reset();
         PhysicsManager.reset();
         CollisionManager.reset();

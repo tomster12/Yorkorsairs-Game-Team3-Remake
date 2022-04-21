@@ -15,15 +15,13 @@ import static com.mygdx.utils.Constants.*;
  */
 public final class RenderingManager {
     private static boolean initialized = false;
-    private static ArrayList<Component> renderItems;
-    private static ArrayList<ArrayList<Integer>> layers;
+    private static ArrayList<ArrayList<Component>> renderLayers;
     private static OrthographicCamera camera;
     private static SpriteBatch batch;
 
 
     public static void Initialize() {
         initialized = true;
-        renderItems = new ArrayList<>();
 
         batch = new SpriteBatch();
         // batch.enableBlending();
@@ -32,10 +30,10 @@ public final class RenderingManager {
         camera.viewportWidth = VIEWPORT_WIDTH / ZOOM;
         camera.update();
 
-        layers = new ArrayList<>(RenderLayer.values().length);
+        renderLayers = new ArrayList<>(RenderLayer.values().length);
 
         for (int i = 0; i < RenderLayer.values().length; i++) {
-            layers.add(new ArrayList<>());
+            renderLayers.add(new ArrayList<>());
         }
     }
 
@@ -45,8 +43,7 @@ public final class RenderingManager {
     public static void reset() {
         if (initialized) {
             initialized = false;
-            renderItems = null;
-            layers = null;
+            renderLayers = null;
             camera = null;
             batch = null;
         }
@@ -75,8 +72,18 @@ public final class RenderingManager {
      */
     public static void addItem(Component item, RenderLayer layer) {
         tryInit();
-        renderItems.add(item);
-        layers.get(layer.ordinal()).add(renderItems.size() - 1);
+        renderLayers.get(layer.ordinal()).add(item);
+    }
+
+    /**
+     * Remove item to the list of renderable and removes to the correct layer
+     *
+     * @param item  component that utilises render
+     * @param layer the layer that it will be removed from
+     */
+    public static void removeItem(Component item, RenderLayer layer) {
+        tryInit();
+        renderLayers.get(layer.ordinal()).remove(item);
     }
 
     /**
@@ -88,13 +95,9 @@ public final class RenderingManager {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
-        for (ArrayList<Integer> layer : layers) {
-            for (Integer itemIndex : layer) {
-                Component item = renderItems.get(itemIndex);
-                if (item.getParent() instanceof Building) {
-                    int i = 0;
-                }
-                item.render();
+        for (ArrayList<Component> renderLayer : renderLayers) {
+            for (Component c : renderLayer) {
+                c.render();
             }
         }
 

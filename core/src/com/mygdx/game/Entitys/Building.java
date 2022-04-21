@@ -109,7 +109,7 @@ public class Building extends Entity implements CollisionCallBack {
 
             Ship ship = ((CannonBall) info.a).getShooter();
             ship.plunder((int)(Math.random() * 10 + 15));
-            ship.reload((int)(Math.random() * 2 + 0));
+            ship.reload((int)(Math.random() * 2 + 2));
             ship.level((int)(Math.random() * 10 + 15));
             destroy();
             ((CannonBall) info.a).kill();

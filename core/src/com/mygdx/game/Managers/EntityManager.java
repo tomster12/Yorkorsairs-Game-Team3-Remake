@@ -67,6 +67,28 @@ public final class EntityManager {
     }
 
     /**
+     * Dont call manually
+     *
+     * @param c the comp to remove
+     */
+    public static void removeComponent(Component c) {
+        components.remove(c);
+    }
+
+    /**
+     * Dont call manually
+     *
+     * @param e the entity to remove
+     */
+    public static void removeEntity(Entity e) {
+        int index = entities.indexOf(e);
+        if (index == -1) return;
+        entities.remove(index);
+        entityNames.remove(index);
+    }
+
+
+    /**
      * gets the first entity found with the given name
      *
      * @param name name of the entity
