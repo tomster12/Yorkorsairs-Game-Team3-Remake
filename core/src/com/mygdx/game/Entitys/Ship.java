@@ -96,6 +96,21 @@ public class Ship extends Entity implements CollisionCallBack {
 
     public void level(float xp) { getComponent(Pirate.class).addXp(xp); }
 
+
+    /**
+     *
+     * Tells pirate to take damage, and goes to end screen if needed
+     *
+     * @param damage amount to take
+     */
+    public void takeDamage(float damage) {
+        // Pass damage to pirate
+        getComponent(Pirate.class).takeDamage(damage);
+        if (!isAlive() && this instanceof Player) {
+            PirateGame.getInstance().setScreen(PirateGame.getInstance().end);
+        }
+    }
+
     /**
      * Associates ship with faction and orients it to the default northern direction.
      *
@@ -217,10 +232,6 @@ public class Ship extends Entity implements CollisionCallBack {
                 ship.plunder((int) (Math.random() * 10 + 15));
                 ship.reload((int) (Math.random() * 2 + 0));
                 ship.level((int) (Math.random() * 10 + 15));
-
-                if (this instanceof Player) {
-                    PirateGame.getInstance().setScreen(PirateGame.getInstance().end);
-                }
             }
 
         } else if (this instanceof Player && !(info.b instanceof Player)) {

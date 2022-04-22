@@ -14,6 +14,7 @@ import com.mygdx.game.Managers.RenderingManager;
 import com.mygdx.game.PirateGame;
 
 import static com.mygdx.utils.Constants.HALF_DIMENSIONS;
+import static com.mygdx.utils.Constants.TILE_SIZE;
 
 /**
  * Responsible for the keyboard/mouse control of the player

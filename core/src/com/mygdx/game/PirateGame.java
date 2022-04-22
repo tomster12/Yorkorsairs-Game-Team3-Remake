@@ -47,6 +47,9 @@ public class PirateGame extends Game {
         ResourceManager.addTexture("healthbar.png");
         ResourceManager.addTexture("healthbarfill.png");
         ResourceManager.addTexture("storm.png");
+        ResourceManager.addTexture("mon64_c.png");
+        ResourceManager.addTexture("mon64_o.png");
+        ResourceManager.addTexture("mon64_s.png");
         ResourceManager.loadAssets();
         reload();
     }

@@ -15,19 +15,44 @@
     "cannonSpeedMultIncrease": 0.2
   },
   "events": {
-    "maxConcurrent": 2,
-    "durationMin": 6,
-    "durationMax": 7,
-    "spawnChance": 1.0,
-    "spawnTimerMax": 3,
+    "maxConcurrent": 10,
+    "durationMin": 23,
+    "durationMax": 28,
+    "spawnChance": 0.5,
+    "spawnTimerMax": 2,
     "zones": [
-      15, 12,
-      22, 25,
-      35, 20
+      18, 76,
+      21, 46,
+      22, 87,
+      25, 57,
+      34, 48,
+      40, 20,
+      49, 78,
+      52, 25,
+      52, 38,
+      54, 67,
+      57, 86,
+      60, 36,
+      62, 17,
+      66, 63,
+      69, 39,
+      77, 58,
+      81, 37,
+      83, 98,
+      85, 66
     ],
 
+    "monster": {
+      "range": 6,
+      "movementSpeed": 1.85,
+      "attackTimerMax": 0.3,
+      "openTimerMax": 0.1,
+      "attackDistance": 1,
+      "attackDamage": 30
+    },
+
     "storm": {
-      "range": 8
+      "range": 5
     }
   },
   "AI": {

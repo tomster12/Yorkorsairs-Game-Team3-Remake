@@ -13,15 +13,16 @@ import com.mygdx.game.Physics.CollisionInfo;
 import com.mygdx.game.Physics.PhysicsBodyType;
 import com.mygdx.utils.Utilities;
 
+
 /**
  * Simple entity shown on locate quests origin
  */
 public class Event extends Entity implements CollisionCallBack {
 
     // Declare variables
-    private boolean isAlive;
-    private float timer;
-    private int zone;
+    protected boolean isAlive;
+    protected float timer;
+    protected int zone;
 
 
     public Event(Vector2 pos, float duration, int zone_) {

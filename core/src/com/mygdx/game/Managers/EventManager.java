@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.Entitys.Event;
+import com.mygdx.game.Entitys.Monster;
 import com.mygdx.game.Entitys.Storm;
 
 import java.util.ArrayList;
@@ -34,6 +35,9 @@ public final class EventManager {
     private static float spawnTimer;
 
 
+    /**
+     * Should only be called once although if it isn't called at all it will be called automatically
+     */
     public static void Initialize() {
         // Initialize variables
         initialized = true;
@@ -60,6 +64,9 @@ public final class EventManager {
     }
 
 
+    /**
+     * Resets the manager if initialized
+     */
     public static void reset() {
         if (initialized) {
             // Reset all variables
@@ -81,19 +88,29 @@ public final class EventManager {
     }
 
 
+    /**
+     * Initialize everything needed for event spawning
+     */
     public static void SpawnEvents() {
         tryInit();
 
         // Update variables
         isRunning = true;
-
         availableZones.clear();
         for (int i = 0; i < zones.length; i++) availableZones.add(i);
-        int count = Math.min(maxEventCount, zones.length);
         events = new ArrayList<>();
+
+        // Spawn some initial events
+        int count = Math.min((int)(maxEventCount * 0.5), zones.length);
+        for (int i = 0; i < count; i++) createEvent();
     }
 
 
+    /**
+     * Return a random duration within a range specified in settings
+     *
+     * @return range
+     */
     private static float getRandomDuration() {
         // Return random duration for event
         float min = settings.getFloat("durationMin");
@@ -117,13 +134,23 @@ public final class EventManager {
         if (availableZones.size() > 0 && events.size() < maxEventCount) {
             spawnTimer = Math.max(0, spawnTimer - Gdx.graphics.getDeltaTime());
             if (spawnTimer == 0) {
-                if (Math.random() < spawnChance) {
-                    int index = availableZones.remove((int) (Math.random() * availableZones.size()));
-                    events.add(new Storm(zones[index].cpy(), getRandomDuration(), index));
-                }
+                if (Math.random() < spawnChance) createEvent();
                 spawnTimer = spawnTimerMax;
             }
         } else spawnTimer = spawnTimerMax;
+    }
+
+
+    /**
+     * Create a new random event
+     */
+    public static void createEvent() {
+        int index = availableZones.remove((int) (Math.random() * availableZones.size()));
+        if (Math.random() < 0.35f) {
+            events.add(new Monster(zones[index].cpy(), getRandomDuration(), index));
+        } else {
+            events.add(new Storm(zones[index].cpy(), getRandomDuration(), index));
+        }
     }
 
 
