@@ -10,3 +10,11 @@ com/mygdx/game/Components/TransformTest.java
  com.mygdx.game.Components.TransformTest
 com/mygdx/game/AI/NodeTest.java
  com.mygdx.game.AI.NodeTest
+com/mygdx/utils/TileMapCellsTest.java
+ com.mygdx.utils.TileMapCellsTest
+com/mygdx/utils/UtilitiesTest.java
+ com.mygdx.utils.UtilitiesTest
+com/mygdx/utils/QueueFIFOTest.java
+ com.mygdx.utils.QueueFIFOTest
+com/mygdx/utils/ConstantsTest.java
+ com.mygdx.utils.ConstantsTest
