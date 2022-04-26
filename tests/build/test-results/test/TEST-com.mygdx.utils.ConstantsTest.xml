@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.mygdx.utils.ConstantsTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-04-26T06:58:28" hostname="AJs-MacBook" time="0.002">
-  <properties/>
-  <testcase name="ConstantsInitTest()" classname="com.mygdx.utils.ConstantsTest" time="0.002"/>
-  <testcase name="ConstantsUpdateViewportTest()" classname="com.mygdx.utils.ConstantsTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.mygdx.game.AI.PathTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-04-26T06:58:28" hostname="AJs-MacBook" time="0.005">
-  <properties/>
-  <testcase name="PathCostTest()" classname="com.mygdx.game.AI.PathTest" time="0.001"/>
-  <testcase name="PathNodeTest()" classname="com.mygdx.game.AI.PathTest" time="0.004"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
