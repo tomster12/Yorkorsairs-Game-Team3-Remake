@@ -224,7 +224,7 @@ public class Ship extends Entity implements CollisionCallBack {
             Faction thisFaction = getComponent(Pirate.class).getFaction();
             if (Objects.equals(ballFaction.getName(), thisFaction.getName())) return;
 
-            getComponent(Pirate.class).takeDamage(ball.getDamage());
+            takeDamage(ball.getDamage());
             ball.kill();
 
             if (!isAlive()) {
