@@ -14,13 +14,23 @@ import static com.mygdx.utils.Constants.*;
  * holds the primary sprite batch and rendering camera
  */
 public final class RenderingManager {
+    private static boolean declared = false;
     private static boolean initialized = false;
     private static ArrayList<ArrayList<Component>> renderLayers;
     private static OrthographicCamera camera;
     private static SpriteBatch batch;
 
+    public static void Declare() {
+        declared = true;
+
+        renderLayers = new ArrayList<>(RenderLayer.values().length);
+        for (int i = 0; i < RenderLayer.values().length; i++) {
+            renderLayers.add(new ArrayList<>());
+        }
+    }
 
     public static void Initialize() {
+        tryDeclare();
         initialized = true;
 
         batch = new SpriteBatch();
@@ -29,12 +39,6 @@ public final class RenderingManager {
         camera.viewportHeight = VIEWPORT_HEIGHT / ZOOM;
         camera.viewportWidth = VIEWPORT_WIDTH / ZOOM;
         camera.update();
-
-        renderLayers = new ArrayList<>(RenderLayer.values().length);
-
-        for (int i = 0; i < RenderLayer.values().length; i++) {
-            renderLayers.add(new ArrayList<>());
-        }
     }
 
     /**
@@ -49,10 +53,12 @@ public final class RenderingManager {
         }
     }
 
+    private static void tryDeclare() {
+        if (!declared) Declare();
+    }
+
     private static void tryInit() {
-        if (!initialized) {
-            Initialize();
-        }
+        if (!initialized) Initialize();
     }
 
     public static OrthographicCamera getCamera() {
@@ -71,7 +77,7 @@ public final class RenderingManager {
      * @param layer the layer that it will be rendered in
      */
     public static void addItem(Component item, RenderLayer layer) {
-        tryInit();
+        tryDeclare();
         renderLayers.get(layer.ordinal()).add(item);
     }
 

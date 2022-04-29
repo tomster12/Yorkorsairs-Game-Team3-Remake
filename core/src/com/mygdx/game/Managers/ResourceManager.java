@@ -29,13 +29,11 @@ public final class ResourceManager {
      * The equivalent to a constructor
      */
     public static void Initialize() {
-        if (initialized) {
-            return;
-        }
+        if (initialized) return;
         initialized = true;
+        ids = new ArrayList<>();
         manager = new AssetManager();
         loaded = false;
-        ids = new ArrayList<>();
         tileMaps = new ArrayList<>();
         fontGenerators = new HashMap<>();
         fonts = new HashMap<>();

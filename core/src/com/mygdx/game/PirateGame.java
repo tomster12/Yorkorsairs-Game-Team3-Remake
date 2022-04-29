@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -17,6 +18,8 @@ import com.mygdx.game.Entitys.UI.MenuScreen;
 public class PirateGame extends Game {
 
     private static PirateGame instance;
+    private static int id_map; // Keep track in between resets
+    private static boolean assetsLoaded;
 
     public MenuScreen menu;
     public GameScreen game;
@@ -25,7 +28,6 @@ public class PirateGame extends Game {
     public Skin skin;
     public ShopScreen Shop;
 
-    private int id_map; // Keep track in between resets
 
 
     public PirateGame() { instance = this; }
@@ -36,7 +38,27 @@ public class PirateGame extends Game {
      */
     @Override
     public void create() {
+        if (!assetsLoaded) loadAssets();
+        reload();
+    }
+
+
+    public void reload() {
+        // Fully reset pirate game then intialize variables
+        fullReset();
+        stage = new Stage(new ScreenViewport());
+        createSkin();
+        menu = new MenuScreen(this);
+        game = new GameScreen(this, id_map);
+        end = new EndScreen(this);
+        Shop = new ShopScreen(this);
+        setScreen(menu);
+    }
+
+
+    public static void loadAssets() {
         // load resources
+        System.out.println("Loading all assets");
         ResourceManager.addTexture("ship.png");
         id_map = ResourceManager.addTileMap("Map.tmx");
         ResourceManager.addTextureAtlas("Boats.txt");
@@ -51,11 +73,11 @@ public class PirateGame extends Game {
         ResourceManager.addTexture("mon64_o.png");
         ResourceManager.addTexture("mon64_s.png");
         ResourceManager.loadAssets();
-        reload();
+        assetsLoaded = true;
     }
 
 
-    public void reload() {
+    public void fullReset() {
         // Reset all managers with state
         RenderingManager.reset();
         EventManager.reset();
@@ -64,15 +86,6 @@ public class PirateGame extends Game {
         CollisionManager.reset();
         QuestManager.reset();
         EntityManager.reset();
-
-        // Fully reset pirate game
-        stage = new Stage(new ScreenViewport());
-        createSkin();
-        menu = new MenuScreen(this);
-        game = new GameScreen(this, id_map);
-        end = new EndScreen(this);
-        Shop = new ShopScreen(this);
-        setScreen(menu);
     }
 
 
