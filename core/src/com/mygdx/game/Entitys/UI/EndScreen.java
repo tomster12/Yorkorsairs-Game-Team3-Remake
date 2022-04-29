@@ -62,7 +62,7 @@ public class EndScreen extends Page {
         b.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                parent.reload();
+                parent.loadVisual();
                 // Gdx.app.exit();
                 // System.exit(0);
             }
@@ -120,7 +120,7 @@ public class EndScreen extends Page {
         b.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                parent.reload();
+                parent.loadVisual();
                 // Gdx.app.exit();
                 // System.exit(0);
             }

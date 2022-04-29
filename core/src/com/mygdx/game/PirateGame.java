@@ -29,7 +29,6 @@ public class PirateGame extends Game {
     public ShopScreen Shop;
 
 
-
     public PirateGame() { instance = this; }
 
 
@@ -38,27 +37,13 @@ public class PirateGame extends Game {
      */
     @Override
     public void create() {
-        if (!assetsLoaded) loadAssets();
-        reload();
+        if (!assetsLoaded) loadStatic();
+        loadVisual();
     }
 
 
-    public void reload() {
-        // Fully reset pirate game then intialize variables
-        fullReset();
-        stage = new Stage(new ScreenViewport());
-        createSkin();
-        menu = new MenuScreen(this);
-        game = new GameScreen(this, id_map);
-        end = new EndScreen(this);
-        Shop = new ShopScreen(this);
-        setScreen(menu);
-    }
-
-
-    public static void loadAssets() {
+    public static void loadStatic() {
         // load resources
-        System.out.println("Loading all assets");
         ResourceManager.addTexture("ship.png");
         id_map = ResourceManager.addTileMap("Map.tmx");
         ResourceManager.addTextureAtlas("Boats.txt");
@@ -74,6 +59,19 @@ public class PirateGame extends Game {
         ResourceManager.addTexture("mon64_s.png");
         ResourceManager.loadAssets();
         assetsLoaded = true;
+    }
+
+
+    public void loadVisual() {
+        // Fully reset pirate game then intialize variables
+        fullReset();
+        stage = new Stage(new ScreenViewport());
+        createSkin();
+        menu = new MenuScreen(this);
+        game = new GameScreen(this, id_map);
+        end = new EndScreen(this);
+        Shop = new ShopScreen(this);
+        setScreen(menu);
     }
 
 

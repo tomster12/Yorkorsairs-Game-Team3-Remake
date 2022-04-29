@@ -18,7 +18,7 @@ public class PirateTest {
     @BeforeClass
     public static void setup() {
         pg = new PirateGame();
-        PirateGame.loadAssets();
+        PirateGame.loadStatic();
     }
 
     @AfterClass
@@ -58,14 +58,14 @@ public class PirateTest {
         assertFalse(pirateT.isAlive());
     }
 
-//    @Test
-//    public void PirateTargetTest () {
-//        Pirate pirateT = new Pirate();
-//        Ship shipT = new Ship();
-//        assertNull(pirateT.getTarget());
-//        pirateT.addTarget(shipT);
-//        assertEquals(shipT, pirateT.getTarget());
-//        pirateT.removeTarget();
-//        assertNull(pirateT.getTarget());
-//    }
+    @Test
+    public void PirateTargetTest () {
+        Pirate pirateT = new Pirate();
+        Ship shipT = new Ship();
+        assertNull(pirateT.getTarget());
+        pirateT.addTarget(shipT);
+        assertEquals(shipT, pirateT.getTarget());
+        pirateT.removeTarget();
+        assertNull(pirateT.getTarget());
+    }
 }

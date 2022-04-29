@@ -60,7 +60,7 @@ public final class PhysicsManager {
         }
     }
 
-    private static void tryInit() {
+    public static void tryInit() {
         if (!initialized) {
             Initialize();
         }

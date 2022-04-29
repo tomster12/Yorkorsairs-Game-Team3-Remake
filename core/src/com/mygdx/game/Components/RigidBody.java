@@ -63,6 +63,7 @@ public class RigidBody extends Component {
 
         def.angle = t.getRotation();
 
+        PhysicsManager.tryInit();
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(h_x, h_y);
 
