@@ -78,29 +78,33 @@ project(":tests") {
 
         implementation "junit:junit:4.+"
         implementation "org.mockito:mockito-all:1.9.+"
+        implementation 'org.mockito:mockito-junit-jupiter:4.3.1'
+
 
         implementation "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
 
         testImplementation 'junit:junit:4.+'
         testImplementation "org.mockito:mockito-all:1.9.+"
+        testImplementation 'org.mockito:mockito-junit-jupiter:4.3.1'
+
 
         testImplementation "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
         testImplementation "com.badlogicgames.gdx:gdx:$gdxVersion"
         testImplementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
 
 //        implementation "junit:junit:4.+"
-////        implementation 'org.junit.jupiter:junit-jupiter:5.8.2'
-////        implementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+//        implementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+//        implementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
 //
 //        implementation "org.mockito:mockito-all:1.9.+"
-////        implementation 'org.mockito:mockito-inline:4.3.1'
-////        implementation 'org.mockito:mockito-junit-jupiter:4.3.1'
+//        implementation 'org.mockito:mockito-inline:4.3.1'
+//        implementation 'org.mockito:mockito-junit-jupiter:4.3.1'
 //
 //        implementation "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
 //        implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
 //
-////        implementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+//        implementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
     }
 
     test {

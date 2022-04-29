@@ -41,7 +41,7 @@
 //
 //    @Test
 //    void UtilitiesTilesToDistanceTest() {
-//        Constants constants = new Constants();
+//        Constants Constants = new Constants();
 //        constants.INIT_CONSTANTS();
 //
 //        assertEquals(utils.tilesToDistance(2), 64);

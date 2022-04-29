@@ -1,39 +1,50 @@
-//package com.mygdx.game.AI;
-//
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.api.extension.ExtendWith;
-//import org.mockito.Mock;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//import org.mockito.junit.jupiter.MockitoExtension;
-//import static org.mockito.Mockito.when;
-//
-//@ExtendWith(MockitoExtension.class)
-//class PathTest {
-//    Path pathT;
-//
-//    @Mock
-//    Node nodeT;
-//
-//    @Mock
-//    Node nodeF;
-//
-//    @BeforeEach
-//    void setUp () {
-//        pathT = new Path(nodeF, nodeT);
-//
-//    }
-//
-//    @Test
-//    void PathNodeTest() {
-//        assertEquals(nodeT, pathT.getToNode());
-//        assertEquals(nodeF, pathT.getFromNode());
-//    }
-//
-//    @Test
-//    void PathCostTest() {
-//        assertEquals(nodeT.cost, pathT.getCost());
-//    }
-//
-//}
+package com.mygdx.game.AI;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+
+import com.mygdx.GdxTestRunner;
+import com.mygdx.game.AI.Node;
+import org.junit.Test;
+import org.mockito.Mock;
+
+import org.junit.*;
+import com.mygdx.game.PirateGame;
+import org.junit.runner.RunWith;
+
+@RunWith(GdxTestRunner.class)
+public class PathTest {
+    private static PirateGame pg;
+
+
+    @BeforeClass
+    public static void setup() {
+        pg = new PirateGame();
+        PirateGame.loadStatic();
+    }
+
+    @AfterClass
+    public static void cleanup() {
+        pg.fullReset();
+    }
+
+    @Test
+    public void PathNodeTest() {
+        Node nodeT = mock(Node.class);
+        Node nodeF = mock(Node.class);
+        Path pathT = new Path(nodeF, nodeT);
+
+        assertEquals(nodeT, pathT.getToNode());
+        assertEquals(nodeF, pathT.getFromNode());
+    }
+
+    @Test
+    public void PathCostTest() {
+        Node nodeT = mock(Node.class);
+        Node nodeF = mock(Node.class);
+        Path pathT = new Path(nodeF, nodeT);
+
+        assertEquals(nodeT.cost, pathT.getCost(), 0.1);
+    }
+
+}
