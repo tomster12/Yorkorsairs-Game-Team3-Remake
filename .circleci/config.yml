@@ -44,3 +44,5 @@ jobs:
 
       # run tests!
       - run: gradle build
+
+      - run: store_test_results
