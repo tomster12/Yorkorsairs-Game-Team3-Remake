@@ -39,7 +39,7 @@ public final class GameManager {
     public static void Initialize() {
         initialized = true;
         currentElement = 0;
-        difficulty = 2;
+        difficulty = 1;
         settings = new JsonReader().
                 parse(Gdx.files.internal("GameSettings.json"));
 
