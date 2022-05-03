@@ -1,7 +1,5 @@
 package com.mygdx.game.Entitys;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
@@ -33,6 +31,7 @@ public class Ship extends Entity implements CollisionCallBack {
     private Transform t;
     private final Vector2 currentDir;
     private Healthbar healthbar;
+    private int newHealth;
 
     /**
      * Creates a ship entity, containing Transform, Renderable, RigidBody, and Pirate components.
@@ -191,6 +190,12 @@ public class Ship extends Entity implements CollisionCallBack {
 
     public void shoot() {
         getComponent(Pirate.class).shoot(currentDir);
+    }
+
+    public void increaseMaxHealth(int newHealth){
+        getComponent(Pirate.class).increaseMaxHealth(newHealth);
+        healthbar.setMaxValue(getMaxHealth());
+        healthbar.setValue(getHealth());
     }
 
     /**

@@ -62,6 +62,7 @@ public final class RenderingManager {
     }
 
     public static OrthographicCamera getCamera() {
+        tryInit();
         return camera;
     }
 
