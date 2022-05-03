@@ -53,6 +53,10 @@
 
     "storm": {
       "range": 5
+    },
+
+    "powerup": {
+      "range": 4
     }
   },
   "AI": {

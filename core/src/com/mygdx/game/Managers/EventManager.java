@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.Entitys.Event;
 import com.mygdx.game.Entitys.Monster;
+import com.mygdx.game.Entitys.Powerup;
 import com.mygdx.game.Entitys.Storm;
 
 import java.util.ArrayList;
@@ -146,8 +147,10 @@ public final class EventManager {
      */
     public static void createEvent() {
         int index = availableZones.remove((int) (Math.random() * availableZones.size()));
-        if (Math.random() < 0.35f) {
+        if (Math.random() <= 0.25f) {
             events.add(new Monster(zones[index].cpy(), getRandomDuration(), index));
+        } else if ((Math.random() > 0.25f) && (Math.random() <= 0.50f)){
+            events.add(new Powerup(zones[index].cpy(), getRandomDuration(), index));
         } else {
             events.add(new Storm(zones[index].cpy(), getRandomDuration(), index));
         }
