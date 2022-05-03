@@ -5,11 +5,11 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 /**
- * creates game constants and is updated when appropriate (I know some aren't technically constants)
+ * creates game Constants and is updated when appropriate (I know some aren't technically Constants)
  */
 public final class Constants {
     /**
-     * Create constants need so it can properly source screen dimensions
+     * Create Constants need so it can properly source screen dimensions
      */
     public static void INIT_CONSTANTS() {
         // FULLSCREEN = !Boolean.parseBoolean(System.getProperty("windowed"));

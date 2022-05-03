@@ -69,7 +69,7 @@ public abstract class Page extends ScreenAdapter {
 
     /**
      * Called once the window is resized
-     * updates constants and stage
+     * updates Constants and stage
      *
      * @param width  new dim x
      * @param height new dom y

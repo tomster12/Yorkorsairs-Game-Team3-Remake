@@ -24,6 +24,7 @@ public final class ResourceManager {
     private static ArrayList<TiledMap> tileMaps;
     private static HashMap<String, FreeTypeFontGenerator> fontGenerators;
     private static HashMap<String, BitmapFont> fonts;
+    public static int mapID;
 
     /**
      * The equivalent to a constructor
@@ -72,6 +73,7 @@ public final class ResourceManager {
         checkAdd();
         manager.load(fPath, Texture.class);
         ids.add(fPath);
+        mapID = ids.size();
         return ids.size();
     }
 

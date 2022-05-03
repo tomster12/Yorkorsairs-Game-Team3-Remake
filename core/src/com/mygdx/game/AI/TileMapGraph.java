@@ -73,6 +73,7 @@ public class TileMapGraph implements IndexedGraph<Node> {
             // for each row
             for (int y = 0; y < layer.getHeight(); y++) {
                 TiledMapTileLayer.Cell center = layer.getCell(x, y);
+//                System.out.println(getType(center));
 
                 if (getType(center) == OBSTACLE) {
                     continue;

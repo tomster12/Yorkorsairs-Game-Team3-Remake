@@ -116,6 +116,15 @@ public class Pirate extends Component {
         return false;
     }
 
+    public Vector2 printPos() {
+        if (targets.peek() != null) {
+            final Ship p = (Ship) parent;
+            final Vector2 pos = p.getPosition();
+            return pos;
+        }
+        return null;
+    }
+
     public Ship getTarget() {
         return targets.peek();
     }
