@@ -56,7 +56,7 @@
     },
 
     "powerup": {
-      "range": 4
+      "range": 2
     }
   },
   "AI": {

@@ -1,7 +1,6 @@
 package com.mygdx.game.Entitys;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.Components.Pirate;
 import com.mygdx.game.Components.Renderable;
 
 import com.mygdx.game.Components.RigidBody;
@@ -14,6 +13,7 @@ import com.mygdx.game.Physics.PhysicsBodyType;
 import com.mygdx.utils.Utilities;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class Powerup extends Event{
     ArrayList<Ship> ships;
@@ -32,10 +32,39 @@ public class Powerup extends Event{
 
     public void update(){
         super.update();
-
+        double selector = Math.random();
         for (Ship ship : ships){
-            int hp = ship.getHealth();
-            System.out.println(hp);
+            EventManager.powerupRemove = 1;
+            if (selector <= 0.2){
+                int hp = ship.getMaxHealth();
+                int chp = ship.getHealth();
+                int newHealth = hp + 5;
+                ship.increaseMaxHealth(newHealth);
+                int difference = newHealth - chp;
+                int addhp = difference * (-1);
+                ship.takeDamage(addhp);
+            }else if ((selector > 0.2) && (selector <= 0.4)){
+                int hp = ship.getMaxHealth();
+                int chp = ship.getHealth();
+                if (hp == chp){
+                    ship.takeDamage(10);
+                }else{
+                    int difference = hp - chp;
+                    int addhp = difference * -1;
+                    ship.takeDamage(addhp);
+                }
+            }else if ((selector > 0.4) && (selector <= 0.6)){
+                double plun = Math.random() * 25;
+                ship.plunder((int) plun);
+            }else if ((selector > 0.6) && (selector <= 0.8)){
+                double negplun = Math.random() * -5;
+                int negplun2 = (int) negplun;
+                ship.plunder(negplun2);
+            }else{
+                ship.level(100);
+
+            }
+
         }
     }
     public void EnterTrigger(CollisionInfo info){
@@ -47,5 +76,8 @@ public class Powerup extends Event{
                 ships.add((Ship) info.a);
             }
         }
+    }
+    public void ExitTrigger(CollisionInfo info){
+        ships.remove((Ship) info.a);
     }
 }
