@@ -3,7 +3,6 @@ package com.mygdx.game.Managers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.Entitys.Event;
 import com.mygdx.game.Entitys.Monster;
@@ -35,6 +34,7 @@ public final class EventManager {
     private static float spawnTimerMax;
     private static float spawnTimer;
     public static int powerupRemove;
+
 
 
     /**
@@ -155,9 +155,9 @@ public final class EventManager {
      */
     public static void createEvent() {
         int index = availableZones.remove((int) (Math.random() * availableZones.size()));
-        if (Math.random() <= 0.25f) {
+        if (Math.random() <= 0.3f) {
             events.add(new Monster(zones[index].cpy(), getRandomDuration(), index));
-        } else if ((Math.random() > 0.25f) && (Math.random() <= 0.50f)){
+        } else if ((Math.random() > 0.3f) && (Math.random() <= 0.50f)){
             events.add(new Powerup(zones[index].cpy(), getRandomDuration(), index));
         } else {
             events.add(new Storm(zones[index].cpy(), getRandomDuration(), index));
@@ -166,4 +166,9 @@ public final class EventManager {
 
 
     public static JsonValue getSettings() { tryInit(); return settings; }
+
+    public static int getDiff(){
+//        return EventManager.getSettings().get("difficulty").getInt("diff");
+        return GameManager.difficulty;
+    }
 }

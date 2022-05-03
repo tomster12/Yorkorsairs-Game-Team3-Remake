@@ -30,6 +30,8 @@ public final class GameManager {
 
     private static TileMapGraph mapGraph;
 
+    public static int difficulty;
+
 
     /**
      * facilitates creation of the game
@@ -37,6 +39,7 @@ public final class GameManager {
     public static void Initialize() {
         initialized = true;
         currentElement = 0;
+        difficulty = 2;
         settings = new JsonReader().
                 parse(Gdx.files.internal("GameSettings.json"));
 
@@ -69,6 +72,7 @@ public final class GameManager {
             currentElement = 0;
             settings = null;
             mapGraph = null;
+            difficulty = 1;
         }
     }
 
@@ -208,5 +212,9 @@ public final class GameManager {
      */
     public static QueueFIFO<Vector2> getPath(Vector2 loc, Vector2 dst) {
         return mapGraph.findOptimisedPath(loc, dst);
+    }
+
+    public static void setDiff(int value){
+        difficulty = value;
     }
 }

@@ -1,14 +1,22 @@
 package com.mygdx.game.Entitys.UI;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.mygdx.game.Managers.EventManager;
+import com.mygdx.game.Managers.GameManager;
 import com.mygdx.game.Managers.ResourceManager;
 import com.mygdx.game.PirateGame;
+
+import java.awt.*;
 
 import static com.mygdx.utils.Constants.VIEWPORT_HEIGHT;
 
@@ -29,10 +37,10 @@ public class MenuScreen extends Page {
         Table t = new Table();
         t.setFillParent(true);
 
-        int buttonwidth = Gdx.graphics.getWidth()/3;
-        int buttonheight = Gdx.graphics.getHeight()/10;
-        int fontscaleheader = Gdx.graphics.getHeight()/300;
-        int fontscalebutton = Gdx.graphics.getHeight()/500;
+        int buttonwidth = Gdx.graphics.getWidth() / 3;
+        int buttonheight = Gdx.graphics.getHeight() / 10;
+        int fontscaleheader = Gdx.graphics.getHeight() / 300;
+        int fontscalebutton = Gdx.graphics.getHeight() / 500;
 
 
         float space = VIEWPORT_HEIGHT * 0.25f;
@@ -53,6 +61,32 @@ public class MenuScreen extends Page {
         });
         t.add(play).size(buttonwidth, buttonheight).top().spaceBottom(space);
         t.row();
+
+        if ((GameManager.difficulty) == 2){
+            TextButton diff = new TextButton("Difficulty: Hard", parent.skin);
+            diff.getLabel().setFontScale(fontscalebutton);
+            diff.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    GameManager.setDiff(1);
+                    System.out.println(GameManager.difficulty);
+                }
+            });
+            t.add(diff).size(buttonwidth, buttonheight).top().spaceBottom(space);
+            t.row();
+        }else {
+            TextButton diff = new TextButton("Difficulty: Normal", parent.skin);
+            diff.getLabel().setFontScale(fontscalebutton);
+            diff.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    GameManager.setDiff(1);
+                    System.out.println(GameManager.difficulty);
+                }
+            });
+            t.add(diff).size(buttonwidth, buttonheight).top().spaceBottom(space);
+            t.row();
+        }
 
         TextButton quit = new TextButton("Quit", parent.skin);
         quit.getLabel().setFontScale(fontscalebutton);
@@ -112,6 +146,33 @@ public class MenuScreen extends Page {
         });
         t.add(play).size(buttonwidth, buttonheight).top().spaceBottom(space);
         t.row();
+
+        if ((GameManager.difficulty) == 2){
+            TextButton diff = new TextButton("Difficulty: Hard", parent.skin);
+            diff.getLabel().setFontScale(fontscalebutton);
+            diff.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    GameManager.setDiff(1);
+                    System.out.println(GameManager.difficulty);
+                }
+            });
+
+            t.add(diff).size(buttonwidth, buttonheight).top().spaceBottom(space);
+            t.row();
+        }else {
+            TextButton diff = new TextButton("Difficulty: Normal", parent.skin);
+            diff.getLabel().setFontScale(fontscalebutton);
+            diff.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    GameManager.setDiff(2);
+                    System.out.println(GameManager.difficulty);
+                }
+            });
+            t.add(diff).size(buttonwidth, buttonheight).top().spaceBottom(space);
+            t.row();
+        }
 
         TextButton quit = new TextButton("Quit", parent.skin);
         quit.getLabel().setFontScale(fontscalebutton);

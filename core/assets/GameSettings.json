@@ -48,7 +48,7 @@
       "attackTimerMax": 0.3,
       "openTimerMax": 0.1,
       "attackDistance": 1,
-      "attackDamage": 30
+      "attackDamage": 15
     },
 
     "storm": {

@@ -40,6 +40,8 @@ public class Monster extends Event {
     private float attackTimer;
     private float openTimerMax;
     private float openTimer;
+    private float attackDamage2;
+    public int difficulty;
 
 
     public Monster(Vector2 pos, float duration, int zone_) {
@@ -72,6 +74,7 @@ public class Monster extends Event {
         attackTimer = attackTimerMax;
         openTimerMax = EventManager.getSettings().get("monster").getFloat("openTimerMax");
         openTimer = openTimerMax;
+        difficulty = (int) EventManager.getDiff();
     }
 
 
@@ -99,9 +102,22 @@ public class Monster extends Event {
                 attackTimer = attackTimerMax;
                 openTimer = openTimerMax;
                 r.getSprite().setTexture(activeOpenTexture);
-                if (dir.len() < attackDistance) target.takeDamage(attackDamage);
-            } else attackTimer = Math.max(0.0f, attackTimer - Gdx.graphics.getDeltaTime());
-
+                if (dir.len() < attackDistance){
+                    target.takeDamage(attackDamage);
+                }
+                if (difficulty == 2){
+                    attackDamage2 = (int) (attackDamage * 1.4);
+                    if (dir.len() < attackDistance) {
+                        target.takeDamage(attackDamage2);
+                    }
+                }else{
+                    if (dir.len() < attackDistance){
+                        target.takeDamage(attackDamage);
+                    }
+                }
+                } else{
+                attackTimer = Math.max(0.0f, attackTimer - Gdx.graphics.getDeltaTime());
+            }
         // Stop attacking
         } else {
             if (openTimer == 0.0f) {
