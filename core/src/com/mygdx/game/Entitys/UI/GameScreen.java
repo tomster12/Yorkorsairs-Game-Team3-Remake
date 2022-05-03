@@ -40,7 +40,7 @@ public class GameScreen extends Page {
         super(parent);
         INIT_CONSTANTS();
         int windowwidth = Gdx.graphics.getWidth()/3;
-        int windownheight = Gdx.graphics.getHeight()/10;
+        int windownheight = Gdx.graphics.getHeight()/5;
 
         PhysicsManager.Initialize(false);
 
@@ -93,6 +93,8 @@ public class GameScreen extends Page {
         table.row();
         table.add(new Label("Shoot in direction of ship", parent.skin)).left();
         table.add(new Image(parent.skin, "space"));
+        table.row();
+        table.add(new Label("Press 'E' to access the shop", parent.skin)).left();
         table.row();
         table.add(new Label("Quit", parent.skin)).left();
         table.add(new Image(parent.skin, "key-esc"));
