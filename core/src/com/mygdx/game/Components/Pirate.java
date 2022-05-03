@@ -61,6 +61,10 @@ public class Pirate extends Component {
         }
     }
 
+    public void increaseMaxHealth(int newMaxHealth){
+        maxHealth = newMaxHealth;
+    }
+
 
     private void updateXp() {
         // Check levelled up

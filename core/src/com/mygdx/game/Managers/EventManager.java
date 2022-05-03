@@ -34,6 +34,7 @@ public final class EventManager {
     private static float spawnChance;
     private static float spawnTimerMax;
     private static float spawnTimer;
+    public static int powerupRemove;
 
 
     /**
@@ -121,9 +122,16 @@ public final class EventManager {
 
 
     public static void update() {
+
         // Remove dead event
         for (int i = 0; i < events.size(); i++) {
-            if (!events.get(i).isAlive()) {
+            if (powerupRemove == 1){
+                availableZones.add(events.get(i).getZone());
+                events.get(i).remove();
+                events.remove(i);
+                i--;
+                powerupRemove = 0;
+            }else if (!events.get(i).isAlive()) {
                 availableZones.add(events.get(i).getZone());
                 events.get(i).remove();
                 events.remove(i);
