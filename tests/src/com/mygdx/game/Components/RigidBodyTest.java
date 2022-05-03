@@ -52,5 +52,4 @@
 //
 //        System.out.println(PhysicsManager.getBody(bodyT.bodyId).getPosition());
 //    }
-//
 //}

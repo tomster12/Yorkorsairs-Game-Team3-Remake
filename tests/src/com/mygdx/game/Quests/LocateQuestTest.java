@@ -98,13 +98,13 @@ public class LocateQuestTest {
 
     @Test
     public void LocateQuestDescTest () {
-        Vector2 qPos = new Vector2(40, -40);
+        Vector2 qPos = new Vector2(40, 40);
         LocateQuest questT = new LocateQuest(qPos, 10);
-        assertEquals("South East", questT.getDescription());
+        assertEquals("North East", questT.getDescription());
 
-        Vector2 newPos = new Vector2(-40, 40);
+        Vector2 newPos = new Vector2(-40, -40);
         LocateQuest questT2 = new LocateQuest(newPos, 10);
-        assertEquals("North West", questT2.getDescription());
+        assertEquals("South West", questT2.getDescription());
     }
 
 }
