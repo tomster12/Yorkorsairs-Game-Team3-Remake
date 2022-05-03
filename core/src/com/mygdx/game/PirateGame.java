@@ -58,6 +58,7 @@ public class PirateGame extends Game {
             ResourceManager.addTexture("mon64_c.png");
             ResourceManager.addTexture("mon64_o.png");
             ResourceManager.addTexture("mon64_s.png");
+            ResourceManager.addTexture("PowerUp.png");
             ResourceManager.loadAssets();
             assetsLoaded = true;
         } else assetsLoaded = true;
