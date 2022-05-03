@@ -122,7 +122,7 @@ public class QuestManager {
         ArrayList<Integer> exclude = new ArrayList<>();
         exclude.add(primaryEnemyId);
         totalQuests = GameManager.getSettings().get("quests").getInt("count");
-        for (int i = 0; i < totalQuests; i++) rndQuest(exclude);
+        for (int i = 0; i < totalQuests - 1; i++) rndQuest(exclude);
         College enemy = GameManager.getCollege(primaryEnemyId);
         addQuest(new KillQuest(enemy));
     }

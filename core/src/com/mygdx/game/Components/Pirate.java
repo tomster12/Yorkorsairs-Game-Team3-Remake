@@ -61,11 +61,15 @@ public class Pirate extends Component {
         }
     }
 
+    public void increaseMaxHealth(int newMaxHealth){
+        maxHealth = newMaxHealth;
+    }
+
 
     private void updateXp() {
         // Check levelled up
         float req = GameManager.getSettings().get("Level").getFloat("xpPerLevel");
-        if (xp > req) {
+        while (xp > req) {
             level++;
             xp = xp - req;
         }
@@ -114,15 +118,6 @@ public class Pirate extends Component {
             return dst >= Ship.getAttackRange();
         }
         return false;
-    }
-
-    public Vector2 printPos() {
-        if (targets.peek() != null) {
-            final Ship p = (Ship) parent;
-            final Vector2 pos = p.getPosition();
-            return pos;
-        }
-        return null;
     }
 
     public Ship getTarget() {

@@ -298,6 +298,10 @@ public final class ResourceManager {
         return fonts.get(fontName);
     }
 
+
+    public static boolean getLoaded() { return loaded;}
+
+
     /**
      * It is imperative that this is called unless you want memory leeks
      */

@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 import com.mygdx.GdxTestRunner;
 import com.mygdx.game.Entitys.Player;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.utils.Constants;
 import org.junit.Test;
 import org.mockito.Mock;
 
@@ -23,6 +24,7 @@ public class LocateQuestTest {
     public static void setup() {
         pg = new PirateGame();
         PirateGame.loadStatic();
+        Constants.INIT_CONSTANTS();
     }
 
     @AfterClass
@@ -98,13 +100,13 @@ public class LocateQuestTest {
 
     @Test
     public void LocateQuestDescTest () {
-        Vector2 qPos = new Vector2(40, -40);
+        Vector2 qPos = new Vector2(Constants.TILE_SIZE * 50 + 50, Constants.TILE_SIZE * 50 + 50);
         LocateQuest questT = new LocateQuest(qPos, 10);
-        assertEquals("South East", questT.getDescription());
+        assertEquals("North East", questT.getDescription());
 
-        Vector2 newPos = new Vector2(-40, 40);
+        Vector2 newPos = new Vector2(Constants.TILE_SIZE * 50 - 40, Constants.TILE_SIZE * 50 - 40);
         LocateQuest questT2 = new LocateQuest(newPos, 10);
-        assertEquals("North West", questT2.getDescription());
+        assertEquals("South West", questT2.getDescription());
     }
 
 }

@@ -2,22 +2,36 @@ package com.mygdx.utils;
 
 import static org.junit.Assert.*;
 
+import com.mygdx.GdxTestRunner;
+import com.mygdx.game.PirateGame;
 import com.mygdx.utils.Constants;
 import org.junit.Test;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 import org.junit.*;
+import org.junit.runner.RunWith;
 
+@RunWith(GdxTestRunner.class)
 public class ConstantsTest {
+
+    // declare variables
+    private static PirateGame pg;
+
+    @BeforeClass
+    public static void setup() {
+        pg = new PirateGame();
+        PirateGame.loadStatic();
+        Constants.INIT_CONSTANTS();
+    }
+
+    @AfterClass
+    public static void cleanup() {
+        pg.fullReset();
+    }
 
     @Test
     public void ConstantsInitTest() {
-        Constants.INIT_CONSTANTS();
-
-        assertEquals(Constants.SCREEN_WIDTH, 1920);
-        assertEquals(Constants.SCREEN_HEIGHT, 1080);
-        assertEquals(Constants.ASPECT_RATIO, 1.0, 0.1);
         assertEquals(Constants.VIEWPORT_HEIGHT, 800);
         assertEquals(Constants.VIEWPORT_WIDTH, 800);
         assertEquals(Constants.HALF_VIEWPORT_HEIGHT, 400);
@@ -32,10 +46,8 @@ public class ConstantsTest {
 
     @Test
     public void ConstantsUpdateViewportTest() {
-        Constants.INIT_CONSTANTS();
         Constants.UPDATE_VIEWPORT(1920, 1200);
 
-        assertEquals(Constants.ASPECT_RATIO, 1.7777777910232544, 0.1);
         assertEquals(Constants.VIEWPORT_HEIGHT, 1200);
         assertEquals(Constants.VIEWPORT_WIDTH, 1920);
         assertEquals(Constants.HALF_VIEWPORT_HEIGHT, 600);

@@ -45,7 +45,6 @@ public class LocateQuest extends Quest {
         } else if (pos.x < 0) {
             description += "West";
         }
-
     }
 
     @Override

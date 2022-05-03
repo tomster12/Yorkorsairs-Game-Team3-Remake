@@ -1,7 +1,5 @@
 package com.mygdx.game.Entitys;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
@@ -33,6 +31,7 @@ public class Ship extends Entity implements CollisionCallBack {
     private Transform t;
     private final Vector2 currentDir;
     private Healthbar healthbar;
+    private int newHealth;
 
     /**
      * Creates a ship entity, containing Transform, Renderable, RigidBody, and Pirate components.
@@ -193,6 +192,12 @@ public class Ship extends Entity implements CollisionCallBack {
         getComponent(Pirate.class).shoot(currentDir);
     }
 
+    public void increaseMaxHealth(int newHealth){
+        getComponent(Pirate.class).increaseMaxHealth(newHealth);
+        healthbar.setMaxValue(getMaxHealth());
+        healthbar.setValue(getHealth());
+    }
+
     /**
      * @return copy of the transform's position
      */
@@ -218,9 +223,11 @@ public class Ship extends Entity implements CollisionCallBack {
         // Player TRIGGER ship - only calls on PLAYER for some reason - hence the else call
         // Otherwise works normally - meaning NPCShip override will call correctly for cannonball but not player^
 
-        if (info.a instanceof CannonBall && isAlive()) {
-            CannonBall ball = (CannonBall) info.a;
+        CannonBall ball = null;
+        if (info.a instanceof CannonBall) ball = (CannonBall) info.a;
+        if (info.b instanceof CannonBall) ball = (CannonBall) info.b;
 
+        if (isAlive() && ball != null) {
             // the ball if from the same faction
             Faction ballFaction = ball.getShooter().getComponent(Pirate.class).getFaction();
             Faction thisFaction = getComponent(Pirate.class).getFaction();

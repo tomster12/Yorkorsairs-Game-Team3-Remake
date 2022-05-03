@@ -19,6 +19,8 @@ import static com.mygdx.utils.Constants.VIEWPORT_HEIGHT;
  * Contains widgets defining the game end screen.
  */
 public class EndScreen extends Page {
+
+    String wonTextContent = "You have lost";
     Label wonText;
     Label playerStats;
 
@@ -30,7 +32,8 @@ public class EndScreen extends Page {
      * Set game end screen status to report a win.
      */
     public void win() {
-        wonText.setText("Congrats You Have Won");
+        wonTextContent = "Congrats You Have Won";
+        wonText.setText(wonTextContent);
     }
 
     /**
@@ -48,7 +51,7 @@ public class EndScreen extends Page {
         float space = VIEWPORT_HEIGHT * 0.25f;
         t.setFillParent(true);
         actors.add(t);
-        wonText = new Label("You have lost", parent.skin);
+        wonText = new Label(wonTextContent, parent.skin);
         wonText.setFontScale(fontscaleheader);
         t.top();
         t.add(wonText).top().spaceBottom(space);
@@ -105,7 +108,7 @@ public class EndScreen extends Page {
         float space = VIEWPORT_HEIGHT * 0.25f;
         t.setFillParent(true);
         actors.add(t);
-        wonText = new Label("You have lost", parent.skin);
+        wonText = new Label(wonTextContent, parent.skin);
         wonText.setFontScale(fontscaleheader);
         t.top();
         t.add(wonText).top().spaceBottom(space);

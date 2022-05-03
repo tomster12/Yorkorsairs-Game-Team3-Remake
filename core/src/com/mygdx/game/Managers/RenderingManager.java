@@ -46,6 +46,7 @@ public final class RenderingManager {
      */
     public static void reset() {
         if (initialized) {
+            declared = false;
             initialized = false;
             renderLayers = null;
             camera = null;
@@ -62,6 +63,7 @@ public final class RenderingManager {
     }
 
     public static OrthographicCamera getCamera() {
+        tryInit();
         return camera;
     }
 

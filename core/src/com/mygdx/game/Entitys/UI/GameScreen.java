@@ -240,7 +240,6 @@ public class GameScreen extends Page {
         quests = new Label("N/A", parent.skin);
         table.add(quests).top().left().size(50);
 
-
         table.top().left();
     }
 }
