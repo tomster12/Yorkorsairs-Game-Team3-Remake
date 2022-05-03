@@ -30,7 +30,6 @@ public class ShopScreen extends Page {
     protected void CreateActors() {
         Table s = new Table();
         s.setFillParent(true);
-        s.setDebug(true);
 
         int buttonwidth = Gdx.graphics.getWidth()/4;
         int buttonheight = Gdx.graphics.getHeight()/12;
