@@ -70,6 +70,7 @@ public class MenuScreen extends Page {
                 public void changed(ChangeEvent event, Actor actor) {
                     GameManager.setDiff(1);
                     System.out.println(GameManager.difficulty);
+                    diff.getLabel().setText("Difficulty: Normal");
                 }
             });
             t.add(diff).size(buttonwidth, buttonheight).top().spaceBottom(space);
@@ -80,8 +81,9 @@ public class MenuScreen extends Page {
             diff.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    GameManager.setDiff(1);
+                    GameManager.setDiff(2);
                     System.out.println(GameManager.difficulty);
+                    diff.getLabel().setText("Difficulty: Hard");
                 }
             });
             t.add(diff).size(buttonwidth, buttonheight).top().spaceBottom(space);
@@ -155,6 +157,7 @@ public class MenuScreen extends Page {
                 public void changed(ChangeEvent event, Actor actor) {
                     GameManager.setDiff(1);
                     System.out.println(GameManager.difficulty);
+                    diff.getLabel().setText("Difficulty: Normal");
                 }
             });
 
@@ -163,11 +166,13 @@ public class MenuScreen extends Page {
         }else {
             TextButton diff = new TextButton("Difficulty: Normal", parent.skin);
             diff.getLabel().setFontScale(fontscalebutton);
+
             diff.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     GameManager.setDiff(2);
                     System.out.println(GameManager.difficulty);
+                    diff.getLabel().setText("Difficulty: Hard");
                 }
             });
             t.add(diff).size(buttonwidth, buttonheight).top().spaceBottom(space);
