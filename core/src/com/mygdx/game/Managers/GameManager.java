@@ -113,6 +113,11 @@ public final class GameManager {
                 s.getComponent(Transform.class).setPosition(getFaction(i + 1).getSpawnPos());
             }
         }
+        if (ballCache.isEmpty()) {
+            for (int i = 0; i < cacheSize; i++) {
+                ballCache.add(new CannonBall());
+            }
+        }
     }
 
     /**
@@ -188,12 +193,6 @@ public final class GameManager {
      * @param dir shoot direction
      */
     public static void shoot(Ship p, Vector2 dir, float attackDamage, float speedMult) {
-        if (ballCache.isEmpty()) {
-            for (int i = 0; i < cacheSize; i++) {
-                ballCache.add(new CannonBall());
-            }
-        }
-
         Vector2 pos = p.getComponent(Transform.class).getPosition().cpy();
         //pos.add(dir.x * TILE_SIZE * 0.5f, dir.y * TILE_SIZE * 0.5f);
         ballCache.get(currentElement++).fire(pos, dir, p, attackDamage, speedMult);

@@ -99,20 +99,22 @@ public class Building extends Entity implements CollisionCallBack {
      */
     @Override
     public void EnterTrigger(CollisionInfo info) {
-        if (info.a instanceof CannonBall && isAlive() && !isFlag) {
-            CannonBall b = (CannonBall) info.a;
+        CannonBall ball = null;
+        if (info.a instanceof CannonBall) ball = (CannonBall) info.a;
+        if (info.b instanceof CannonBall) ball = (CannonBall) info.b;
 
+        if (isAlive() && ball != null && !isFlag) {
             // the ball if from the same faction
-            Faction ballFaction = b.getShooter().getComponent(Pirate.class).getFaction();
+            Faction ballFaction = ball.getShooter().getComponent(Pirate.class).getFaction();
             Faction thisFaction = getComponent(Pirate.class).getFaction();
             if(Objects.equals(ballFaction.getName(), thisFaction.getName())) return;
 
-            Ship ship = ((CannonBall) info.a).getShooter();
+            Ship ship = ball.getShooter();
             ship.plunder((int)(Math.random() * 10 + 15));
             ship.reload((int)(Math.random() * 2 + 2));
             ship.level((int)(Math.random() * 10 + 15));
             destroy();
-            ((CannonBall) info.a).kill();
+            ball.kill();
         }
     }
 

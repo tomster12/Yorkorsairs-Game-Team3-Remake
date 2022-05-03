@@ -223,9 +223,11 @@ public class Ship extends Entity implements CollisionCallBack {
         // Player TRIGGER ship - only calls on PLAYER for some reason - hence the else call
         // Otherwise works normally - meaning NPCShip override will call correctly for cannonball but not player^
 
-        if (info.a instanceof CannonBall && isAlive()) {
-            CannonBall ball = (CannonBall) info.a;
+        CannonBall ball = null;
+        if (info.a instanceof CannonBall) ball = (CannonBall) info.a;
+        if (info.b instanceof CannonBall) ball = (CannonBall) info.b;
 
+        if (isAlive() && ball != null) {
             // the ball if from the same faction
             Faction ballFaction = ball.getShooter().getComponent(Pirate.class).getFaction();
             Faction thisFaction = getComponent(Pirate.class).getFaction();
