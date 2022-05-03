@@ -2,6 +2,7 @@ package com.mygdx.game.AI;
 
 import com.badlogic.gdx.ai.pfa.GraphPath;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.GdxTestRunner;
 import com.mygdx.game.Managers.ResourceManager;
 import com.mygdx.game.PirateGame;
@@ -77,13 +78,13 @@ public class TileMapGraphTest {
         assertEquals(mapgraphT.getNodeCount(), 10000);
     }
 
-//    @Test
-//    public void TMGConnectionsTest () {
-//        TileMapGraph mapgraphT = new TileMapGraph(ResourceManager.getTileMap("Map.tmx"));
-//        Node testNode = mapgraphT.getNode(40, 40);
-//        System.out.println(mapgraphT.getConnections(testNode));
-//
-////        assertEquals(mapgraphT.getIndex(testNode), 3412);
-//    }
+    @Test
+    public void TMGConnectionsTest () {
+        TileMapGraph mapgraphT = new TileMapGraph(ResourceManager.getTileMap("Map.tmx"));
+        Node testNode = mapgraphT.getNode(40, 40);
+        System.out.println(mapgraphT.getConnections(testNode));
+
+        assertEquals(mapgraphT.getConnections(testNode).size, 8);
+    }
 
 }

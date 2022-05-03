@@ -66,15 +66,15 @@ public class TransformTest {
     public void TransformVecToAngleTest () {
         Transform transT = new Transform();
         Vector2 v1 = new Vector2(2, -2);
-        assertEquals(-2.356194496154785, transT.vectorToAngle(v1),0.1);
+        assertEquals(-2.3561, transT.vectorToAngle(v1),0.001);
     }
 
     @Test
     public void TransformAngleToVecTest () {
         Transform transT = new Transform();
         Vector2 v1 = new Vector2(2, -2);
-        assertEquals(-0.9092, transT.angleToVector(v1, 2).x, 0.01);
-        assertEquals(-0.4161, transT.angleToVector(v1, 2).y, 0.01);
+        assertEquals(-0.9092, transT.angleToVector(v1, 2).x, 0.001);
+        assertEquals(-0.4161, transT.angleToVector(v1, 2).y, 0.001);
     }
 
 }
