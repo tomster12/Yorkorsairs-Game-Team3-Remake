@@ -33,7 +33,7 @@ public class LocateQuest extends Quest {
         this();
         loc.set(pos);
         radius = r * r;
-        pos.scl(1 / TILE_SIZE); // centres on 0, 0
+        pos.scl(1 / TILE_SIZE).sub(50, 50); // centres on 0, 0
         description = "";
         if (pos.y > 0) {
             description += "North ";
@@ -45,7 +45,6 @@ public class LocateQuest extends Quest {
         } else if (pos.x < 0) {
             description += "West";
         }
-
     }
 
     @Override
