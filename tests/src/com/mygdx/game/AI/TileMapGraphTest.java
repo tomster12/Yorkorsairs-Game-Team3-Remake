@@ -86,5 +86,4 @@ public class TileMapGraphTest {
 
         assertEquals(mapgraphT.getConnections(testNode).size, 8);
     }
-
 }

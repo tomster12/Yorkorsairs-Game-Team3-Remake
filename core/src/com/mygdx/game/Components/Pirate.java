@@ -69,7 +69,7 @@ public class Pirate extends Component {
     private void updateXp() {
         // Check levelled up
         float req = GameManager.getSettings().get("Level").getFloat("xpPerLevel");
-        if (xp > req) {
+        while (xp > req) {
             level++;
             xp = xp - req;
         }

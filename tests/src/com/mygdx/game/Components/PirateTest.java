@@ -87,7 +87,7 @@ public class PirateTest {
 
         pirateT.addXp(200);
         assertEquals(pirateT.getXp(), 1, 0.1);
-        assertEquals(pirateT.getLevel(), 2);
+        assertEquals(pirateT.getLevel(), 4);
     }
 
     @Test
