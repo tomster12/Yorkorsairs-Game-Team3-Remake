@@ -44,21 +44,23 @@ public class PirateGame extends Game {
 
     public static void loadStatic() {
         // load resources
-        ResourceManager.addTexture("ship.png");
-        id_map = ResourceManager.addTileMap("Map.tmx");
-        ResourceManager.addTextureAtlas("Boats.txt");
-        ResourceManager.addTextureAtlas("UISkin/skin.atlas");
-        ResourceManager.addTextureAtlas("Buildings.txt");
-        ResourceManager.addTexture("menuBG.jpg");
-        ResourceManager.addTexture("Chest.png");
-        ResourceManager.addTexture("healthbar.png");
-        ResourceManager.addTexture("healthbarfill.png");
-        ResourceManager.addTexture("storm.png");
-        ResourceManager.addTexture("mon64_c.png");
-        ResourceManager.addTexture("mon64_o.png");
-        ResourceManager.addTexture("mon64_s.png");
-        ResourceManager.loadAssets();
-        assetsLoaded = true;
+        if (!ResourceManager.getLoaded()) {
+            ResourceManager.addTexture("ship.png");
+            id_map = ResourceManager.addTileMap("Map.tmx");
+            ResourceManager.addTextureAtlas("Boats.txt");
+            ResourceManager.addTextureAtlas("UISkin/skin.atlas");
+            ResourceManager.addTextureAtlas("Buildings.txt");
+            ResourceManager.addTexture("menuBG.jpg");
+            ResourceManager.addTexture("Chest.png");
+            ResourceManager.addTexture("healthbar.png");
+            ResourceManager.addTexture("healthbarfill.png");
+            ResourceManager.addTexture("storm.png");
+            ResourceManager.addTexture("mon64_c.png");
+            ResourceManager.addTexture("mon64_o.png");
+            ResourceManager.addTexture("mon64_s.png");
+            ResourceManager.loadAssets();
+            assetsLoaded = true;
+        } else assetsLoaded = true;
     }
 
 
